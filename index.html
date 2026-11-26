@@ -439,11 +439,7 @@ body.cardmode{background:#1a0f2e;overflow:visible}
     <div class="bars" id="bars"></div>
   </section>
 
-  <section>
-    <h2>🤖 פקודות הבוט</h2>
-    <p class="sub">כותבים בקבוצה בוואטסאפ, הבוט עונה. לחיצה על פקודה מעתיקה אותה.</p>
-    <div class="kgrid"><div class="kcat"><div class="kh"><span class="ki">🖼️</span><div><b>תמונות</b><small>הבוט שולח תמונה, וכל פעם יוצא משהו אחר</small></div></div><div class="kl"><button type="button" class="kc" data-c="!עיתון"><code>!עיתון</code><span>העיתון + המבוקש של היום</span></button><button type="button" class="kc" data-c="!מבוקש"><code>!מבוקש</code><span>פוסטר WANTED</span></button><button type="button" class="kc" data-c="!מלך"><code>!מלך</code><span>תעודת מלך השבוע</span></button><button type="button" class="kc" data-c="!גרף"><code>!גרף</code><span>גרף השבועות</span></button><button type="button" class="kc" data-c="!פרסים"><code>!פרסים</code><span>פרסי השבוע</span></button><button type="button" class="kc" data-c="!ארכיון"><code>!ארכיון</code><span>השערים הקודמים</span></button><button type="button" class="kc" data-c="!טילט"><code>!טילט</code><span>מד הטילט</span></button><button type="button" class="kc" data-c="!סיכום"><code>!סיכום</code><span>כל השבוע בתמונה</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">👤</span><div><b>על חבר</b><small>כותבים את הפקודה ואחריה שם</small></div></div><div class="kl"><button type="button" class="kc" data-c="!אבחנה אדיר"><code>!אבחנה <i>אדיר</i></code><span>מכתב מהמרפאה</span></button><button type="button" class="kc" data-c="!צוואה נהוראי"><code>!צוואה <i>נהוראי</i></code><span>הצוואה שלו</span></button><button type="button" class="kc" data-c="!הורוסקופ מלאכי"><code>!הורוסקופ <i>מלאכי</i></code><span>מה הכוכבים אומרים</span></button><button type="button" class="kc" data-c="!כרטיס אסף"><code>!כרטיס <i>אסף</i></code><span>כרטיס שחקן</span></button><button type="button" class="kc" data-c="!מבוקש אסף"><code>!מבוקש <i>אסף</i></code><span>פוסטר עליו</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">🎉</span><div><b>כיף</b><small>בשביל הבלגן בקבוצה</small></div></div><div class="kl"><button type="button" class="kc" data-c="!דין אדיר"><code>!דין <i>אדיר</i></code><span>משפט עם סקר, 3 דקות</span></button><button type="button" class="kc" data-c="!מהיר"><code>!מהיר</code><span>הראשון שעונה מנצח</span></button><button type="button" class="kc" data-c="!קללה אסף"><code>!קללה <i>אסף</i></code><span>קללה מצחיקה</span></button><button type="button" class="kc" data-c="!מחמאה נהוראי"><code>!מחמאה <i>נהוראי</i></code><span>מחמאה מוגזמת</span></button><button type="button" class="kc" data-c="!תשאל נצא היום?"><code>!תשאל <i>נצא היום?</i></code><span>כדור הבדולח</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">📊</span><div><b>מידע</b><small>מה קורה עכשיו</small></div></div><div class="kl"><button type="button" class="kc" data-c="!מי"><code>!מי</code><span>מי ב-GTA עכשיו</span></button><button type="button" class="kc" data-c="!שבוע"><code>!שבוע</code><span>הדירוג + ספירה לאחור</span></button><button type="button" class="kc" data-c="!מניות"><code>!מניות</code><span>בורסת החבורה</span></button><button type="button" class="kc" data-c="!אתר"><code>!אתר</code><span>הקישור לאתר</span></button><button type="button" class="kc" data-c="!פקודות"><code>!פקודות</code><span>הרשימה בוואטסאפ</span></button></div></div></div>
-    <p class="ktip">🤫 יש גם פקודה סודית אחת. מי שימצא אותה יקבל מצעד.</p>
+  <section style="padding-top:0">
     <p class="note" id="note"></p>
   </section>
 </main>
@@ -973,7 +969,6 @@ async function buildCard(){
   if(idx>=0&&crew[idx])info.who=crew[idx].name;if(CARD.wname)info.who=CARD.wname;
   window.__CARD_INFO=info;window.__CARD_READY=true;
 }
-document.querySelectorAll(".kc").forEach(b=>b.addEventListener("click",()=>{const t=b.dataset.c;try{navigator.clipboard.writeText(t).then(()=>toast(`📋 הועתק: ${t}`),()=>toast(t))}catch(e){toast(t)}}));
 if(CARD.kind){load().then(buildCard).catch(e=>{window.__CARD_ERR=String(e);window.__CARD_READY=true})}else{load();setInterval(load,60000)}
 }
 </script>
