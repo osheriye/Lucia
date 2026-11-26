@@ -261,6 +261,7 @@ footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-si
 @media(max-width:600px){.king{grid-template-columns:1fr;text-align:center;justify-items:center}.king .stats{justify-content:center}.crown{width:96px;height:96px;font-size:42px}}
 
 
+.games{grid-template-columns:1fr!important}
 /* ===== commands ===== */
 .kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px;align-items:start}
 .kcat,.kauto{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px}
@@ -400,7 +401,7 @@ body.cardmode{background:#1a0f2e;overflow:visible}
   <section>
     <div class="games">
       <div><h2>🏎️ מירוץ קליקים</h2><div class="game"><div class="ctime" id="ctime">10.0</div><button class="clicker" type="button" id="clicker">התחל!</button><div class="gscore" id="cres">כמה קליקים תעשה ב-10 שניות?</div><div style="margin-top:12px"><button class="btn" type="button" id="cshare" style="display:none;background:var(--orange);font-size:15px">📋 העתק תוצאה לוואטסאפ</button></div></div></div>
-      <div><h2>🔴 הכפתור האדום</h2><div class="redzone"><button class="redbtn" type="button" id="redBtn">אל<br>תלחצו!</button><div class="redmsg" id="redMsg" aria-live="polite"></div><div class="redcount" id="redCount"></div></div></div>
+      
     </div>
   </section>
 
@@ -424,6 +425,7 @@ body.cardmode{background:#1a0f2e;overflow:visible}
     <div class="race"><div class="top"><span class="day" id="raceDay">יום ראשון</span><button class="btn" type="button" id="racePlay">▶ הפעל מרוץ</button></div><div class="track" id="raceTrack"></div></div>
   </section>
 
+
   <section>
     <h2>🔥 מד הטילט</h2>
     <p class="sub">כמה החבורה מכורה השבוע, לפי סך השעות.</p>
@@ -440,7 +442,7 @@ body.cardmode{background:#1a0f2e;overflow:visible}
   <section>
     <h2>🤖 פקודות הבוט</h2>
     <p class="sub">כותבים בקבוצה בוואטסאפ, הבוט עונה. לחיצה על פקודה מעתיקה אותה.</p>
-    <div class="kgrid"><div class="kcat"><div class="kh"><span class="ki">🖼️</span><div><b>תמונות</b><small>הבוט שולח תמונה, וכל פעם יוצא משהו אחר</small></div></div><div class="kl"><button type="button" class="kc" data-c="!עיתון"><code>!עיתון</code><span>העיתון של לוסיה</span></button><button type="button" class="kc" data-c="!מבוקש"><code>!מבוקש</code><span>פוסטר WANTED</span></button><button type="button" class="kc" data-c="!מלך"><code>!מלך</code><span>תעודת מלך השבוע</span></button><button type="button" class="kc" data-c="!גרף"><code>!גרף</code><span>גרף השבועות</span></button><button type="button" class="kc" data-c="!מרוץ"><code>!מרוץ</code><span>מרוץ המלכים</span></button><button type="button" class="kc" data-c="!פרסים"><code>!פרסים</code><span>פרסי השבוע</span></button><button type="button" class="kc" data-c="!ארכיון"><code>!ארכיון</code><span>השערים הקודמים</span></button><button type="button" class="kc" data-c="!טילט"><code>!טילט</code><span>מד הטילט</span></button><button type="button" class="kc" data-c="!סיכום"><code>!סיכום</code><span>כל השבוע בתמונה</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">👤</span><div><b>על חבר</b><small>כותבים את הפקודה ואחריה שם</small></div></div><div class="kl"><button type="button" class="kc" data-c="!אבחנה אדיר"><code>!אבחנה <i>אדיר</i></code><span>מכתב מהמרפאה</span></button><button type="button" class="kc" data-c="!צוואה נהוראי"><code>!צוואה <i>נהוראי</i></code><span>הצוואה שלו</span></button><button type="button" class="kc" data-c="!הורוסקופ מלאכי"><code>!הורוסקופ <i>מלאכי</i></code><span>מה הכוכבים אומרים</span></button><button type="button" class="kc" data-c="!כרטיס אסף"><code>!כרטיס <i>אסף</i></code><span>כרטיס שחקן</span></button><button type="button" class="kc" data-c="!מבוקש אסף"><code>!מבוקש <i>אסף</i></code><span>פוסטר עליו</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">🎉</span><div><b>כיף</b><small>בשביל הבלגן בקבוצה</small></div></div><div class="kl"><button type="button" class="kc" data-c="!דין אדיר"><code>!דין <i>אדיר</i></code><span>משפט עם סקר, 3 דקות</span></button><button type="button" class="kc" data-c="!מהיר"><code>!מהיר</code><span>הראשון שעונה מנצח</span></button><button type="button" class="kc" data-c="!כפתור"><code>!כפתור</code><span>הכפתור האדום</span></button><button type="button" class="kc" data-c="!קללה אסף"><code>!קללה <i>אסף</i></code><span>קללה מצחיקה</span></button><button type="button" class="kc" data-c="!מחמאה נהוראי"><code>!מחמאה <i>נהוראי</i></code><span>מחמאה מוגזמת</span></button><button type="button" class="kc" data-c="!תשאל נצא היום?"><code>!תשאל <i>נצא היום?</i></code><span>כדור הבדולח</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">📊</span><div><b>מידע</b><small>מה קורה עכשיו</small></div></div><div class="kl"><button type="button" class="kc" data-c="!מי"><code>!מי</code><span>מי ב-GTA עכשיו</span></button><button type="button" class="kc" data-c="!שבוע"><code>!שבוע</code><span>הדירוג + ספירה לאחור</span></button><button type="button" class="kc" data-c="!מניות"><code>!מניות</code><span>בורסת החבורה</span></button><button type="button" class="kc" data-c="!אתר"><code>!אתר</code><span>הקישור לאתר</span></button><button type="button" class="kc" data-c="!פקודות"><code>!פקודות</code><span>הרשימה בוואטסאפ</span></button></div></div></div>
+    <div class="kgrid"><div class="kcat"><div class="kh"><span class="ki">🖼️</span><div><b>תמונות</b><small>הבוט שולח תמונה, וכל פעם יוצא משהו אחר</small></div></div><div class="kl"><button type="button" class="kc" data-c="!עיתון"><code>!עיתון</code><span>העיתון + המבוקש של היום</span></button><button type="button" class="kc" data-c="!מבוקש"><code>!מבוקש</code><span>פוסטר WANTED</span></button><button type="button" class="kc" data-c="!מלך"><code>!מלך</code><span>תעודת מלך השבוע</span></button><button type="button" class="kc" data-c="!גרף"><code>!גרף</code><span>גרף השבועות</span></button><button type="button" class="kc" data-c="!פרסים"><code>!פרסים</code><span>פרסי השבוע</span></button><button type="button" class="kc" data-c="!ארכיון"><code>!ארכיון</code><span>השערים הקודמים</span></button><button type="button" class="kc" data-c="!טילט"><code>!טילט</code><span>מד הטילט</span></button><button type="button" class="kc" data-c="!סיכום"><code>!סיכום</code><span>כל השבוע בתמונה</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">👤</span><div><b>על חבר</b><small>כותבים את הפקודה ואחריה שם</small></div></div><div class="kl"><button type="button" class="kc" data-c="!אבחנה אדיר"><code>!אבחנה <i>אדיר</i></code><span>מכתב מהמרפאה</span></button><button type="button" class="kc" data-c="!צוואה נהוראי"><code>!צוואה <i>נהוראי</i></code><span>הצוואה שלו</span></button><button type="button" class="kc" data-c="!הורוסקופ מלאכי"><code>!הורוסקופ <i>מלאכי</i></code><span>מה הכוכבים אומרים</span></button><button type="button" class="kc" data-c="!כרטיס אסף"><code>!כרטיס <i>אסף</i></code><span>כרטיס שחקן</span></button><button type="button" class="kc" data-c="!מבוקש אסף"><code>!מבוקש <i>אסף</i></code><span>פוסטר עליו</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">🎉</span><div><b>כיף</b><small>בשביל הבלגן בקבוצה</small></div></div><div class="kl"><button type="button" class="kc" data-c="!דין אדיר"><code>!דין <i>אדיר</i></code><span>משפט עם סקר, 3 דקות</span></button><button type="button" class="kc" data-c="!מהיר"><code>!מהיר</code><span>הראשון שעונה מנצח</span></button><button type="button" class="kc" data-c="!קללה אסף"><code>!קללה <i>אסף</i></code><span>קללה מצחיקה</span></button><button type="button" class="kc" data-c="!מחמאה נהוראי"><code>!מחמאה <i>נהוראי</i></code><span>מחמאה מוגזמת</span></button><button type="button" class="kc" data-c="!תשאל נצא היום?"><code>!תשאל <i>נצא היום?</i></code><span>כדור הבדולח</span></button></div></div><div class="kcat"><div class="kh"><span class="ki">📊</span><div><b>מידע</b><small>מה קורה עכשיו</small></div></div><div class="kl"><button type="button" class="kc" data-c="!מי"><code>!מי</code><span>מי ב-GTA עכשיו</span></button><button type="button" class="kc" data-c="!שבוע"><code>!שבוע</code><span>הדירוג + ספירה לאחור</span></button><button type="button" class="kc" data-c="!מניות"><code>!מניות</code><span>בורסת החבורה</span></button><button type="button" class="kc" data-c="!אתר"><code>!אתר</code><span>הקישור לאתר</span></button><button type="button" class="kc" data-c="!פקודות"><code>!פקודות</code><span>הרשימה בוואטסאפ</span></button></div></div></div>
     <p class="ktip">🤫 יש גם פקודה סודית אחת. מי שימצא אותה יקבל מצעד.</p>
     <p class="note" id="note"></p>
   </section>
@@ -531,8 +533,8 @@ function render(data,isSample){
   $("bars").innerHTML=sorted.map((m,i)=>`<div class="bar"><span>${["🥇","🥈","🥉"][i]||"  "} ${esc(m.name)}</span><div class="tr"><i style="width:${Math.round(m.hours/max*100)}%"></i></div><span>${m.hours} ש'</span></div>`).join("");
   funRender(crew);
   extrasRender(crew,data);
-  raceRender(crew,data);
   radioRender(crew,data);
+  raceRender(crew,data);
   willsRender(crew,data);
   trailerRender(crew);
   archiveRender(data);
@@ -776,15 +778,6 @@ function dxRender(crew){
     if(DSTYLE==="c")return`<div class="dxC"><div class="hd"><span>ד"ר בוט · מרפאת לוסיה · תיק ${num}</span><span class="rx">℞</span></div><div class="pt">שם המטופל: ${esc(m.name)} ${esc(m.icon||"")}</div><div style="color:#c1121f;font-weight:700;font-size:15px">${esc(dg)}</div><div class="hw">${esc(rx)}. ${esc(desc)}</div><div class="sig">ד"ר בוט 🤖</div></div>`;
     return`<div class="dxc"><div class="h"><span>🏥 מרפאת לוסיה</span><span>תיק מס' ${num}</span></div><h3>${esc(m.icon||"")} ${esc(m.name)}</h3><div class="dg">אבחנה: ${esc(dg)}</div><div class="sev" aria-label="חומרה ${sev} מתוך 5">${[1,2,3,4,5].map(i=>`<i class="${i<=sev?"on":""}"></i>`).join("")}</div><p>${esc(desc)}</p><div class="rx">💊 המלצת הרופא: ${esc(rx)}</div></div>`}).join("");
 }
-/* ===== red button ===== */
-const RED=["אמרנו לא ללחוץ 😐","שוב? באמת?","הבוט רשם את זה בתיק שלך 📝","אוקיי, עכשיו כל השוטרים בעיר מחפשים אותך 🚓","אתה יודע שזה לא עושה כלום, נכון?","טוב. לחיצה אחת נוספת ומשהו נורא יקרה.","...","נו, טוב שסיפרת. עכשיו כולם יודעים שאתה לא עומד בפיתויים","הודעה לאמא שלך נשלחה (סתם 😅)","מזל טוב! זכית ב... כלום 🎉","אתה לוחץ יותר ממה שאסף נכנס ל-GTA","הכפתור התעייף. תן לו לנוח 😮‍💨"];
-let redN=0;try{redN=+localStorage.getItem("lucia-red")||0}catch(e){}
-function redShow(){$("redCount").textContent=redN?`לחצת ${redN} פעמים. הבוט זוכר.`:"אף אחד לא לחץ... עדיין."}
-redShow();
-$("redBtn").addEventListener("click",()=>{redN++;try{localStorage.setItem("lucia-red",redN)}catch(e){}
-  const msg=redN<=RED.length?RED[redN-1]:RED[Math.floor(Math.random()*RED.length)];$("redMsg").textContent=msg;redShow();
-  const z=document.querySelector(".redzone");z.classList.remove("shake");void z.offsetWidth;z.classList.add("shake");
-  if(redN===7){$("redMsg").textContent="💥 הזהרנו אותך!";parade("🚓🚓🚓🚁🚓")}});
 /* ===== easter egg ===== */
 function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),3200)}
 function parade(em){
@@ -945,7 +938,7 @@ async function buildCard(){
   const avgH=crew.reduce((t,m)=>t+m.hours,0)/(crew.length||1);
   info.stocks=crew.map(m=>({name:m.name,price:Math.round(50+m.hours*12),ch:(avgH>0?Math.round((m.hours-avgH)/avgH*100):0)}));
   info.trailer=trailerLines.map(l=>Array.isArray(l)?l.join(" · "):l);
-  info.radio=radioMsgs.slice();info.red=RED.slice();
+  info.radio=radioMsgs.slice();
   const tb=$("themeBanner");info.theme=tb&&getComputedStyle(tb).display!=="none"?tb.textContent.trim():"";
   info.king=certKing?{name:certKing.name,hours:certKing.hours,sessions:certKing.sessions}:null;
   if(K==="info"){window.__CARD_INFO=info;window.__CARD_READY=true;return}
@@ -960,11 +953,10 @@ async function buildCard(){
   const sec=t=>body.insertAdjacentHTML("beforeend",`<div class="sec">${esc(t)}</div>`);
   const only=(id,force)=>{const el=$(id);if(!el)return;if(idx<0&&force)idx=Math.floor(r()*crew.length);if(idx>=0){[...el.children].forEach((c,i)=>{if(i!==idx)c.remove()});el.classList.add("one")}move(el)};
   const stockRow=()=>body.insertAdjacentHTML("beforeend",`<div class="stk">📈 ${info.stocks.map(s=>`<span>${esc(s.name)} <b class="${s.ch>=0?"up":"dn"}">${s.ch>=0?"▲":"▼"}${Math.abs(s.ch)}%</b></span>`).join("")}</div>`);
-  if(K==="paper")move($("paper"));
+  if(K==="paper"){move($("paper"));sec("🚨 המבוקש של היום");move($("wanted"))}
   else if(K==="morning"){if(info.theme)body.insertAdjacentHTML("beforeend",`<div class="thm">${esc(info.theme)}</div>`);move($("paper"));sec("🚨 המבוקש של היום");move($("wanted"))}
   else if(K==="wanted"){move($("wanted"));const nm=body.querySelector(".nm");if(nm)CARD.wname=nm.textContent}
   else if(K==="chart"){chartStyle=CARD.style||["glow","bars","rank","lines"][Math.floor(r()*4)];drawChart();move($("chart").closest(".chart"))}
-  else if(K==="race")move($("raceTrack").closest(".race"));
   else if(K==="archive"){const a=$("archive");[...a.children].slice(4).forEach(c=>c.remove());move(a)}
   else if(K==="awards")move($("awards"));
   else if(K==="will")only("wills",true);
@@ -973,7 +965,7 @@ async function buildCard(){
   else if(K==="profile"){if(idx<0)idx=Math.floor(r()*crew.length);openProfile(idx);const d=$("dlgBody");const b=d.querySelector("button");if(b)b.remove();const box=document.createElement("div");box.className="pcard";box.innerHTML=d.innerHTML;body.appendChild(box);try{$("dlg").close()}catch(e){}}
   else if(K==="crew"){body.insertAdjacentHTML("beforeend",`<div class="onl">${$("online").innerHTML}</div>`);move($("crew"))}
   else if(K==="tilt"){move($("tilt"));sec("שעות השבוע");move($("bars"))}
-  else if(K==="weekly"){move($("king"));sec("📊 שבוע אחרי שבוע");chartStyle=["glow","bars","rank","lines"][Math.floor(r()*4)];drawChart();move($("chart").closest(".chart"));sec("🏁 איך זה נראה במהלך השבוע");move($("raceTrack").closest(".race"))}
+  else if(K==="weekly"){move($("king"));sec("📊 שבוע אחרי שבוע");chartStyle=["glow","bars","rank","lines"][Math.floor(r()*4)];drawChart();move($("chart").closest(".chart"))}
   out.insertAdjacentHTML("beforeend",`<div class="cf">${esc(CARD.site||"צוות לוסיה")} · ${esc(date)}</div>`);
   document.body.appendChild(out);document.body.classList.add("cardmode");
   try{await document.fonts.ready}catch(e){}
