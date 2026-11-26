@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>צוות לוסיה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800;900&family=Frank+Ruhl+Libre:wght@500;900&family=Suez+One&display=swap" rel="stylesheet">
+<style>
+/* VOICE: loud, sun-drenched crew page — a gang of friends showing off.
+   IDEA: a neon motel sign at sunset on a coastal strip, the crew's hangout.
+   PICTURE: layered sunset with sun stripes, palms and a skyline, the crew name lit like a sign.
+   COLOUR and TYPE: hot pink #ff2e88, sunset orange #ff8a3d, teal #19d3c5 on night purple #1a0f2e; Rubik 900.
+   LAYOUT: hero sign, "online now" strip, king of the week, crew cards, weekly bars, bot commands. */
+:root{color-scheme:dark;--bg:#1a0f2e;--panel:#251744;--line:#3a2763;--ink:#fff3ea;--mute:#c4b2e0;--pink:#ff2e88;--orange:#ff8a3d;--teal:#19d3c5;--sun:#ffd166}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Rubik,system-ui,sans-serif;overflow-x:clip}
+a{color:var(--teal)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(5vw,16px)}
+.hero{position:relative;min-height:min(78vh,640px);display:grid;place-items:center;overflow:hidden;background:linear-gradient(#2b0f4d 0%,#7a1f6e 38%,#ff5e62 66%,#ff9a3d 82%,#1a0f2e 82.2%)}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.sign{position:relative;text-align:center;padding:24px;margin-top:-6vh}
+.sign small{display:inline-block;font-weight:600;letter-spacing:0;background:#1a0f2ecc;padding:4px 14px;border-radius:99px;color:var(--sun);margin-bottom:10px}
+.sign h1{margin:0;font-weight:900;font-size:clamp(52px,11vw,124px);line-height:.95;color:#fff;text-shadow:0 0 18px #ff2e88,0 0 42px #ff2e88aa,4px 4px 0 #1a0f2e}
+.sign p{margin:12px auto 0;max-width:34ch;font-size:18px;color:#fff;text-shadow:0 2px 8px #1a0f2e}
+.online{background:var(--teal);color:#062a27;font-weight:600}
+.online .wrap{display:flex;gap:10px 22px;flex-wrap:wrap;align-items:center;padding-block:14px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#062a27;margin-inline-end:6px;animation:p 1.6s infinite}
+@keyframes p{50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+.chip{background:#ffffff66;border-radius:99px;padding:3px 12px}
+section{padding:clamp(36px,6vw,72px) 0}
+h2{font-size:clamp(28px,4vw,40px);line-height:1.05;margin:0 0 6px;font-weight:900}
+.sub{color:var(--mute);margin:0 0 24px}
+.king{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;background:linear-gradient(120deg,#3b1660,#251744);border:2px solid var(--sun);border-radius:22px;padding:26px}
+.crown{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;font:900 52px Rubik;background:var(--sun);color:#3b1660;box-shadow:0 0 0 8px #ffd16633}
+.king b{display:block;font-size:clamp(30px,5vw,46px);font-weight:900;line-height:1.05}
+.king .stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;color:var(--mute)}
+.king .stats strong{color:var(--ink);font-size:22px;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;position:relative}
+.av{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font:900 26px Rubik;color:#1a0f2e;margin-bottom:10px}
+.card h3{margin:0;font-size:22px;font-weight:800}
+.card .id{color:var(--mute);font-size:14px;direction:ltr;text-align:right}
+.card .tag{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;background:#ffffff14}
+.card .st{position:absolute;top:18px;left:18px;font-size:13px;font-weight:600}
+.on{color:var(--teal)}.off{color:var(--mute)}
+.card dl{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 0}
+.card dt{color:var(--mute);font-size:13px}.card dd{margin:0;font-weight:800;font-size:18px}
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:5.5em minmax(0,1fr) 4.5em;gap:12px;align-items:center}
+.bar .tr{height:22px;background:#ffffff10;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--pink))}
+.bar span:last-child{font-weight:800;text-align:left;direction:ltr;white-space:nowrap}
+.cmds{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.cmd{background:var(--panel);border-radius:16px;padding:16px;border-inline-start:5px solid var(--teal)}
+.cmd code{font:800 20px Rubik;color:var(--teal)}
+.cmd p{margin:4px 0 0;color:var(--mute)}
+.note{font-size:13px;color:var(--mute);margin-top:18px}
+.night{background:linear-gradient(90deg,var(--pink),var(--orange));color:#1a0f2e;border-radius:22px;padding:22px 26px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center}
+.night b{font-size:clamp(22px,3.4vw,32px);font-weight:900;display:block;line-height:1.1}
+.cd{display:flex;gap:8px;direction:ltr}
+.cd div{background:#1a0f2e;color:var(--sun);border-radius:12px;padding:8px 12px;text-align:center;min-width:64px}
+.cd strong{display:block;font-size:26px;font-weight:900;line-height:1}
+.cd span{font-size:12px;color:var(--mute)}
+.card{cursor:pointer;transition:transform .15s}.card:hover{transform:translateY(-3px)}
+.card:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+dialog{border:0;border-radius:22px;padding:0;background:var(--panel);color:var(--ink);width:min(440px,92vw)}
+dialog::backdrop{background:#0b0616cc}
+.dlg{padding:24px}.dlg .av{width:72px;height:72px;font-size:32px}
+.dlg h3{margin:0;font-size:28px;font-weight:900}
+.dlg ul{list-style:none;padding:0;margin:16px 0;display:grid;gap:10px}
+.dlg li{background:#ffffff0d;border-radius:12px;padding:10px 14px}.dlg li span{color:var(--mute);font-size:13px;display:block}
+.dlg q{display:block;font-size:18px;color:var(--sun);margin-top:6px}
+.dlg button{width:100%;min-height:46px;border:0;border-radius:12px;background:var(--teal);color:#062a27;font:800 16px Rubik;cursor:pointer}
+@media(max-width:600px){.night{grid-template-columns:1fr;text-align:center}.cd{justify-content:center}}
+.fun2{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:start}
+@media(max-width:820px){.fun2{grid-template-columns:minmax(0,1fr)}}
+.wanted{background:#f3dfb2;color:#4a2a10;border-radius:6px;padding:22px;text-align:center;transform:rotate(-1.5deg);box-shadow:0 10px 0 #0006;border:3px dashed #8a5a2b}
+.wanted .w1{font:900 clamp(44px,8vw,64px)/1 Rubik;letter-spacing:0;color:#7a1e12}
+.wanted .w2{font-weight:800;margin:4px 0 12px}
+.wanted .mug{width:130px;height:130px;margin:0 auto;border-radius:10px;background:#d8b77a;display:grid;place-items:center;font:900 70px Rubik;color:#4a2a10;border:4px solid #4a2a10}
+.wanted .nm{font:900 34px Rubik;margin:10px 0 0}
+.wanted .rw{font-weight:800;font-size:18px;margin-top:8px;background:#7a1e12;color:#f3dfb2;display:inline-block;padding:4px 14px;border-radius:6px}
+.wanted p{margin:10px 0 0;font-size:15px}
+.paper{background:#f6f1e6;color:#1b1b1b;border-radius:8px;padding:20px 22px;font-family:"Frank Ruhl Libre",serif}
+.paper .mast{text-align:center;border-bottom:3px double #1b1b1b;padding-bottom:6px;margin-bottom:12px}
+.paper .mast b{font-size:clamp(30px,5vw,42px);font-weight:900;display:block;line-height:1}
+.paper .mast span{font:600 13px Rubik;color:#555}
+.paper h3{font-size:clamp(22px,3.4vw,30px);line-height:1.15;margin:0 0 12px;font-weight:900}
+.paper ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.paper li{border-top:1px solid #bbb;padding-top:8px;font-size:17px;font-weight:500}
+.awards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.award{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}
+.award .ic{font-size:42px;line-height:1}
+.award b{display:block;font-size:20px;margin-top:8px}
+.award .who{font:900 26px Rubik;color:var(--sun);margin:4px 0}
+.award p{margin:0;color:var(--mute);font-size:14px}
+.tilt{background:var(--panel);border-radius:22px;padding:22px}
+.tilt .track{position:relative;height:26px;border-radius:99px;background:linear-gradient(270deg,#19d3c5,#ffd166,#ff8a3d,#ff2e88)}
+.tilt .needle{position:absolute;top:-8px;width:6px;height:42px;background:#fff;border-radius:3px;box-shadow:0 0 0 3px #1a0f2e;transform:translateX(50%)}
+.tilt .lbls{display:flex;justify-content:space-between;color:var(--mute);font-size:13px;margin-top:10px}
+.tilt b{font-size:clamp(24px,4vw,34px);font-weight:900;display:block;margin-bottom:14px}
+.btn{min-height:50px;padding:0 28px;border:0;border-radius:14px;background:var(--pink);color:#fff;font:900 18px Rubik;cursor:pointer}
+.btn:focus-visible,select:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.ticker{background:#0b0616;border-block:1px solid var(--line);overflow:hidden;white-space:nowrap}
+.ticker .tt{display:inline-flex;gap:34px;padding:10px 0;animation:tk 28s linear infinite;font-weight:800}
+.ticker .tt span{display:inline-flex;gap:8px;align-items:baseline}
+.ticker .up{color:#3ee08f}.ticker .dn{color:#ff5470}.ticker small{color:var(--mute);font-weight:600}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(50%)}}
+@media(prefers-reduced-motion:reduce){.ticker .tt{animation:none;flex-wrap:wrap;white-space:normal}}
+.paper .joke{margin-top:14px;padding:10px 12px;background:#ece3cf;border-radius:6px;font-size:16px}
+.paper .joke b,.paper .letters b{font-family:Rubik;font-size:13px;display:block;color:#7a1e12}
+.paper .letters{margin-top:14px;border-top:3px double #1b1b1b;padding-top:10px}
+.paper .letters p{margin:6px 0;font-size:16px;font-style:italic}
+.horo{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.horo div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.horo b{display:block;font-size:18px;color:var(--sun)}.horo span{color:var(--mute);font-size:13px}
+.horo p{margin:6px 0 0}
+.chart{background:var(--panel);border-radius:22px;padding:18px}
+.chart .fig{position:relative;height:320px}
+.chart svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-weight:600}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-inline-end:6px;vertical-align:-2px}
+body.tod-day .hero{background:linear-gradient(#5fc6ff 0%,#9fe0ff 45%,#ffe3a3 72%,#ffc46b 82%,#1a0f2e 82.2%)}
+body.tod-night .hero{background:linear-gradient(#05030f 0%,#120a2e 45%,#2b145a 72%,#3d1b6e 82%,#1a0f2e 82.2%)}
+body.tod-night .hero::before{content:"";position:absolute;inset:0 0 25% 0;background-image:radial-gradient(1.5px 1.5px at 10% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 30% 8%,#fff,transparent),radial-gradient(2px 2px at 55% 25%,#fff,transparent),radial-gradient(1.5px 1.5px at 75% 12%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 30%,#fff,transparent),radial-gradient(1px 1px at 42% 40%,#fff,transparent),radial-gradient(1px 1px at 65% 45%,#fff,transparent),radial-gradient(1.5px 1.5px at 20% 45%,#fff,transparent)}
+body.tod-night .hero .sunc{fill:#f3f0ff}body.tod-night .hero .stripe{display:none}
+body.tod-day .hero .sunc{fill:#fff3b0}
+.theme-banner{display:none;background:var(--theme-bg,#ffd166);color:#1a0f2e;text-align:center;font-weight:900;font-size:18px;padding:10px 16px}
+body.has-theme .theme-banner{display:block}
+.fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.fx span{position:absolute;top:-40px;font-size:28px;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(720px) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.fx{display:none}}
+body.th-hanukkah{--pink:#4da3ff;--orange:#9fd0ff;--sun:#ffe27a}
+body.th-purim{--pink:#ff3ec8;--teal:#7ee081}
+body.th-roshhashana{--pink:#e0483e;--sun:#ffc94d}
+body.th-pesach{--pink:#3f8cff;--sun:#f5e6c4}
+body.th-birthday{--pink:#ff5fa2;--sun:#ffe066}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{min-height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 15px Rubik;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--pink);border-color:transparent;color:#fff}
+.radio{background:#0b0616;border-bottom:1px solid var(--line)}
+.radio .wrap{display:flex;gap:12px;align-items:center;padding-block:10px;min-height:48px}
+.radio .live{flex:none;background:#ff2e2e;color:#fff;font:900 12px Rubik;padding:3px 8px;border-radius:6px;animation:p 1.4s infinite}
+.radio #radioMsg{font-weight:600;transition:opacity .4s}
+.race{background:var(--panel);border-radius:22px;padding:18px}
+.race .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.race .day{font:900 28px Rubik;color:var(--sun)}
+.race .track{position:relative}
+.race .rrow{position:absolute;inset-inline:0;height:40px;display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:10px;align-items:center;transition:top .6s ease}
+.race .rrow .b{height:30px;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-inline:10px;font-weight:900;color:#1a0f2e;min-width:42px;transition:width .6s ease;white-space:nowrap}
+.race .rrow span{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(prefers-reduced-motion:reduce){.race .rrow,.race .rrow .b{transition:none}}
+.wills{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.will{background:#f3ead4;color:#2b1d0e;border-radius:6px;padding:18px 20px;font-family:"Frank Ruhl Libre",serif;box-shadow:0 6px 0 #0005;position:relative}
+.will h3{margin:0 0 6px;font-size:24px;font-weight:900}.will p{margin:6px 0;font-size:16px;line-height:1.5}
+.will .sign{margin-top:10px;font-style:italic;color:#7a5a2b;font-size:15px}
+.will::after{content:"📜";position:absolute;top:12px;left:14px;font-size:24px}
+.dx{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.dxc{background:#f4f8fb;color:#12324a;border-radius:16px;padding:16px 18px;border-top:8px solid #e63946}
+.dxc .h{display:flex;justify-content:space-between;align-items:center;font:800 13px Rubik;color:#5b7a90}
+.dxc h3{margin:8px 0 2px;font:900 22px Rubik}.dxc .dg{font-weight:800;color:#c1121f;font-size:17px}
+.dxc .sev{display:flex;gap:4px;margin:10px 0}.dxc .sev i{flex:1;height:10px;border-radius:3px;background:#d6e2ea}.dxc .sev i.on{background:#e63946}
+.dxc p{margin:6px 0 0;font-size:15px}.dxc .rx{margin-top:10px;padding-top:8px;border-top:1px dashed #a9c0cf;font-size:14px}
+.redzone{text-align:center;background:var(--panel);border-radius:22px;padding:30px 18px}
+.redbtn{width:180px;height:180px;border-radius:50%;border:0;cursor:pointer;background:radial-gradient(circle at 35% 30%,#ff7b7b,#d00000 60%,#7a0000);box-shadow:0 12px 0 #5a0000,0 18px 30px #0008;color:#fff;font:900 24px Rubik;transition:transform .08s,box-shadow .08s}
+.redbtn:active{transform:translateY(10px);box-shadow:0 2px 0 #5a0000,0 6px 14px #0008}
+.redbtn:focus-visible{outline:4px solid var(--sun);outline-offset:6px}
+.redmsg{min-height:2.6em;margin-top:22px;font-weight:800;font-size:20px}.redcount{color:var(--mute);font-size:14px}
+.shake{animation:shk .4s}@keyframes shk{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){.shake{animation:none}}
+.parade{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.parade span{position:absolute;left:0;font-size:56px;animation:drive linear both}
+@keyframes drive{from{transform:translateX(-12vw)}to{transform:translateX(112vw)}}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--sun);color:#1a0f2e;font-weight:900;padding:12px 20px;border-radius:14px;z-index:60;box-shadow:0 8px 24px #0008}
+.trailer{position:relative;background:#000;border-radius:22px;min-height:300px;display:grid;place-items:center;text-align:center;padding:30px 20px;overflow:hidden}
+.trailer::before,.trailer::after{content:"";position:absolute;inset-inline:0;height:34px;background:#000;z-index:2}
+.trailer::before{top:0}.trailer::after{bottom:0}
+.trailer .tl{font:900 clamp(26px,5vw,48px)/1.15 Rubik;color:#fff;max-width:20ch;transition:opacity .6s,transform .6s;text-shadow:0 0 30px #ff2e8888}
+.trailer .tl.hide{opacity:0;transform:scale(.96)}
+.trailer .tl small{display:block;font-size:.45em;font-weight:600;color:#ffd166;margin-top:10px}
+.trailer .play{position:absolute;bottom:46px;z-index:3}
+.archive{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.cover{flex:none;width:230px;scroll-snap-align:start;background:#f6f1e6;color:#1b1b1b;border-radius:6px;padding:14px;font-family:"Frank Ruhl Libre",serif;transform:rotate(var(--r));box-shadow:0 6px 0 #0005}
+.cover .m{text-align:center;border-bottom:2px double #1b1b1b;margin-bottom:8px}.cover .m b{font-size:22px;display:block;line-height:1}.cover .m span{font:600 11px Rubik;color:#666}
+.cover h4{margin:0;font-size:18px;line-height:1.2;font-weight:900}.cover p{margin:8px 0 0;font-size:13px;border-top:1px solid #bbb;padding-top:6px}
+.games{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+@media(max-width:820px){.games{grid-template-columns:minmax(0,1fr)}}
+.game{background:var(--panel);border-radius:22px;padding:22px;text-align:center}
+.gscore{margin-top:14px;color:var(--mute);font-weight:700}
+.clicker{width:170px;height:170px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#7af0e4,#19d3c5 55%,#0c7d74);color:#062a27;font:900 26px Rubik;cursor:pointer;box-shadow:0 10px 0 #064a45;touch-action:manipulation;user-select:none}
+.clicker:active{transform:translateY(8px);box-shadow:0 2px 0 #064a45}
+.clicker:disabled{filter:grayscale(.6);cursor:default}
+.ctime{font:900 44px Rubik;color:var(--sun);margin:12px 0 4px}
+/* --- will variants --- */
+.wB{background:#fff;color:#111;padding:20px;border:1px solid #bbb;position:relative;font-family:"Frank Ruhl Libre",serif;box-shadow:0 6px 0 #0004}
+.wB .top{display:flex;justify-content:space-between;font:700 12px Rubik;color:#555;border-bottom:2px solid #111;padding-bottom:6px}
+.wB h3{text-align:center;margin:10px 0;font-size:24px}.wB ol{margin:0;padding-inline-start:22px;font-size:16px;line-height:1.5}
+.wB .sg{margin-top:14px;font-size:13px;color:#444;padding-inline-end:90px}
+.wB .stamp{position:absolute;bottom:16px;left:14px;border:3px solid #c1121f;color:#c1121f;font:900 16px Rubik;padding:4px 10px;transform:rotate(-12deg);border-radius:6px}
+.wC{background:#fffbe7 repeating-linear-gradient(#fffbe7 0 27px,#9cc3e6 27px 28px);color:#1e3a8a;padding:16px 18px 18px 22px;border-inline-start:3px solid #f08b8b;font:400 19px/28px "Suez One",serif;transform:rotate(var(--r,1deg));box-shadow:0 6px 14px #0006}
+.wC b{color:#b91c1c;font-weight:400}
+/* --- clinic variants --- */
+.dxB{background:#05080d;border-radius:14px;padding:16px;color:#bfe3ff;position:relative;overflow:hidden;border:2px solid #1c2a38}
+.dxB .film{height:120px;border-radius:8px;background:radial-gradient(ellipse at 50% 45%,#9fd6ff55,transparent 62%),#0b1520;display:grid;place-items:center;font-size:62px;filter:grayscale(1) brightness(1.6) contrast(1.3);margin-bottom:10px}
+.dxB .tag{position:absolute;top:10px;left:10px;font:700 11px Rubik;color:#7fd1ff;border:1px solid #7fd1ff;padding:2px 6px;border-radius:4px;z-index:1}
+.dxB b{color:#7fd1ff}.dxB p{margin:6px 0 0;font-size:15px}
+.dxC{background:#fdfdfd;color:#1a1a1a;padding:16px 18px;border-radius:4px;border-top:14px solid #2a9d8f;box-shadow:0 6px 0 #0004}
+.dxC .hd{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ccc;padding-bottom:8px;font-size:14px;color:#444}
+.dxC .rx{font:900 40px "Frank Ruhl Libre",serif;color:#2a9d8f;line-height:1}
+.dxC .pt{margin-top:8px;font-weight:700}.dxC .hw{font:400 19px/1.5 "Suez One",serif;color:#1e3a8a;margin:8px 0}
+.dxC .sig{text-align:left;font:400 18px "Suez One",serif;color:#1e3a8a;border-top:1px solid #999;padding-top:4px;width:55%;margin-inline-start:auto}
+/* --- newspaper variants --- */
+.paper.vb{background:#fff;font-family:Rubik;padding:0;overflow:hidden}
+.paper.vb .m{background:#e10600;color:#fff;font:900 clamp(30px,5vw,40px) Rubik;text-align:center;padding:6px}
+.paper.vb .br{background:#ffd60a;color:#111;font:900 14px Rubik;padding:4px 10px;display:inline-block;margin:12px 14px 0}
+.paper.vb h3{font:900 clamp(26px,4vw,34px)/1.05 Rubik;margin:6px 14px 10px}
+.paper.vb ul{margin:0 14px;border-top:4px solid #111;padding-top:4px}.paper.vb li{font-weight:700;border-top:1px solid #ddd}
+.paper.vb .letters,.paper.vb .joke{margin:12px 14px 14px;font-family:Rubik}.paper.vb .letters{border-top:4px solid #111}
+.paper.vc{background:#0d1b2a;color:#fff;font-family:Rubik;padding:0;overflow:hidden}
+.paper.vc .scr{height:150px;background:linear-gradient(135deg,#1b263b,#415a77);display:grid;place-items:center;font-size:64px;position:relative}
+.paper.vc .live{position:absolute;top:10px;right:10px;background:#e63946;color:#fff;font:900 12px Rubik;padding:3px 8px;border-radius:4px}
+.paper.vc .ch{position:absolute;bottom:10px;left:12px;font:900 14px Rubik;color:#ffffffaa}
+.paper.vc .lt{display:flex;align-items:stretch}.paper.vc .lt b{background:#e63946;color:#fff;padding:8px 12px;font:900 15px Rubik;white-space:nowrap;display:flex;align-items:center}
+.paper.vc .lt h3{background:#fff;color:#111;padding:8px 12px;font:800 clamp(16px,2.4vw,20px)/1.3 Rubik;margin:0;flex:1}
+.paper.vc ul{background:#ffd60a;color:#111;display:flex;gap:26px;overflow:hidden;white-space:nowrap;padding:6px 10px;margin:0}
+.paper.vc li{border:0;padding:0;font:700 14px Rubik;flex:none}
+.paper.vc .letters{margin:0;padding:10px 14px;border-top:0;color:#dbe7f3}.paper.vc .letters b,.paper.vc .joke b{color:#ffd60a}
+.paper.vc .joke{margin:0 14px 14px;background:#1b263b;color:#fff}
+/* ===== compact overrides ===== */
+section{padding:clamp(20px,3.2vw,38px) 0}
+h2{font-size:clamp(22px,3vw,30px);margin-bottom:4px}
+.sub{margin:0 0 14px;font-size:15px}
+.hero{min-height:min(56vh,480px)}
+.sign h1{font-size:clamp(46px,9vw,96px)}.sign p{font-size:16px}
+.night{padding:14px 18px}.night b{font-size:clamp(18px,2.6vw,24px)}.cd div{min-width:54px;padding:6px 10px}.cd strong{font-size:22px}
+.king{padding:16px 20px;gap:18px}.crown{width:84px;height:84px;font-size:38px}.king b{font-size:clamp(26px,4vw,36px)}.king .stats strong{font-size:19px}
+.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{padding:12px;border-radius:14px}.av{width:42px;height:42px;font-size:20px;border-radius:12px;margin-bottom:6px}
+.card h3{font-size:18px}.card .tag{margin-top:6px;font-size:12px;padding:2px 8px}.card .st{top:12px;left:12px;font-size:12px}
+.card dl{margin-top:8px;gap:2px}.card dt{font-size:12px}.card dd{font-size:16px}
+.awards{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}.award{padding:12px}.award .ic{font-size:30px}.award b{font-size:16px;margin-top:4px}.award .who{font-size:20px}
+.horo{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}.horo div{padding:10px 12px}.horo p{font-size:15px}
+.wills,.dx{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.will,.wB,.wC,.dxc,.dxB,.dxC{font-size:14px}.will h3,.wB h3,.dxc h3{font-size:19px}.will p,.wB ol{font-size:14px}.wC{font-size:16px;line-height:24px;background-size:auto;background:#fffbe7 repeating-linear-gradient(#fffbe7 0 23px,#9cc3e6 23px 24px)}
+.dxB .film{height:84px;font-size:44px}.dxC .hw{font-size:16px}
+.chart .fig{height:260px}.race .rrow{height:34px}.race .rrow .b{height:26px}.race .day{font-size:22px}
+.tilt{padding:16px}.tilt b{font-size:clamp(20px,3vw,26px);margin-bottom:10px}
+.trailer{min-height:220px}
+.redzone{padding:16px 14px}.redbtn{width:130px;height:130px;font-size:19px}.redmsg{margin-top:16px;font-size:17px}
+.clicker{width:130px;height:130px;font-size:21px}.ctime{font-size:34px;margin:6px 0 2px}.game{padding:16px}
+.cmd{padding:12px}.cmd code{font-size:17px}
+.wanted{padding:16px}.wanted .w1{font-size:clamp(36px,6vw,50px)}.wanted .mug{width:96px;height:96px;font-size:50px}.wanted .nm{font-size:28px}
+.paper{padding:14px 16px}.paper .mast b{font-size:clamp(26px,4vw,34px)}.paper h3{font-size:clamp(19px,2.8vw,24px)}.paper li{font-size:15px}
+.cover{width:200px;padding:12px}.cover h4{font-size:16px}
+.bars{gap:8px}.bar .tr{height:16px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.awards{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{min-height:44vh}}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-size:14px;text-align:center}
+@media(max-width:600px){.king{grid-template-columns:1fr;text-align:center;justify-items:center}.king .stats{justify-content:center}.crown{width:96px;height:96px;font-size:42px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs><clipPath id="sc"><circle cx="600" cy="470" r="150"/></clipPath></defs>
+    <g clip-path="url(#sc)"><rect class="sunc" x="440" y="300" width="320" height="200" fill="#ffd166"/>
+      <g class="stripe" fill="#ff6a5c"><rect x="440" y="440" width="320" height="10"/><rect x="440" y="465" width="320" height="13"/><rect x="440" y="492" width="320" height="16"/></g></g>
+    <g fill="#2a0d3d">
+      <rect x="0" y="470" width="70" height="60"/><rect x="60" y="430" width="50" height="100"/><rect x="120" y="455" width="80" height="75"/>
+      <rect x="880" y="420" width="60" height="110"/><rect x="950" y="445" width="90" height="85"/><rect x="1050" y="405" width="45" height="125"/><rect x="1100" y="460" width="100" height="70"/>
+      <rect x="0" y="524" width="1200" height="120"/>
+    </g>
+    <g fill="#ff2e88" opacity=".9"><rect x="70" y="445" width="6" height="6"/><rect x="88" y="470" width="6" height="6"/><rect x="965" y="465" width="6" height="6"/><rect x="1062" y="430" width="6" height="6"/><rect x="1015" y="485" width="6" height="6"/></g>
+    <g id="palm" fill="#1a0f2e">
+      <path d="M262 530 C258 470 250 420 238 360 L246 358 C260 420 268 470 272 530Z"/>
+      <path d="M240 360 C200 340 170 345 140 370 C180 352 210 352 240 366Z"/>
+      <path d="M240 360 C230 320 205 300 170 300 C210 315 228 335 236 366Z"/>
+      <path d="M242 360 C270 325 300 318 330 330 C300 330 272 342 246 366Z"/>
+      <path d="M242 362 C285 355 315 370 335 400 C305 380 280 372 244 368Z"/>
+      <path d="M240 362 C215 380 200 405 198 430 C210 405 225 388 244 368Z"/>
+    </g>
+    <use href="#palm" transform="translate(1260 -40) scale(-1.15 1.08)"/>
+    <use href="#palm" transform="translate(70 30) scale(.8 .9)"/>
+  </svg>
+  <div class="fx" id="fx" aria-hidden="true"></div>
+  <div class="sign">
+    <small>GTA · PlayStation · מאז 2026</small>
+    <h1 id="logo">צוות לוסיה</h1>
+    <p>החבורה, הסטטיסטיקות, ומי באמת חי בתוך המשחק.</p>
+  </div>
+</header>
+
+<div class="theme-banner" id="themeBanner"></div>
+<div class="online"><div class="wrap" id="online"></div></div>
+<div class="ticker" aria-label="בורסת לוסיה"><div class="tt" id="ticker"></div></div>
+<div class="radio"><div class="wrap"><span class="live">📻 LIVE</span><span id="radioMsg" aria-live="polite"></span></div></div>
+
+<main class="wrap">
+  <section>
+    <div class="night">
+      <div><span id="nightLabel">🏆 הסיכום השבועי בוואטסאפ בעוד</span><b id="nightText">מוצאי שבת, 21:00</b></div>
+      <div class="cd" id="cd"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>🎬 הטריילר של השבוע</h2>
+    <div class="trailer" id="trailer"><div class="tl" id="tl">השבוע... בצוות לוסיה...</div><button class="btn play" type="button" id="tlPlay">▶ הפעל טריילר</button></div>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>👑 מלך השבוע</h2>
+    <p class="sub">מי שישב הכי הרבה שעות ב-GTA השבוע, לפי הבוט.</p>
+    <div class="king" id="king"></div>
+    <div style="text-align:center;margin-top:16px"><button class="btn" type="button" id="certBtn">🏅 הוצא תעודה למלך</button></div>
+  </section>
+
+  <section>
+    <h2>החבורה</h2>
+    <p class="sub">לחיצה על כרטיס פותחת את הפרופיל.</p>
+    <div class="grid" id="crew"></div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="fun2">
+      <div><h2>🚨 מבוקש</h2><p class="sub" id="wantedSub">מי שנעלם הכי הרבה זמן מהעיר.</p><div class="wanted" id="wanted"></div></div>
+      <div><h2>📰 עיתון הצוות</h2><p class="sub" id="paperSub">כותרות שנכתבות לבד מהנתונים.</p><div class="paper" id="paper"></div><div style="text-align:center;margin-top:12px"><button class="btn" type="button" id="newEd" style="background:var(--orange)">🔄 מהדורה חדשה</button></div></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>🗞️ ארכיון השערים</h2>
+    <p class="sub">השער הראשי של ידיעות לוסיה מכל שבוע שעבר.</p>
+    <div class="archive scroll" id="archive"></div>
+  </section>
+
+  <section>
+    <h2>🏆 פרסי השבוע</h2>
+    <p class="sub">הכבוד הכי מפוקפק בעיר.</p>
+    <div class="awards" id="awards"></div>
+  </section>
+
+  <section>
+    <h2>📜 הצוואות</h2>
+    <p class="sub">כל אחד וההוראות האחרונות שלו, למקרה שייעלם לתמיד לתוך המשחק.</p>
+    <div class="wills" id="wills"></div>
+  </section>
+
+  <section>
+    <h2>🩺 מרפאת לוסיה</h2>
+    <p class="sub">אבחון רפואי (לא רשמי בכלל) לכל אחד, לפי הנתונים של השבוע.</p>
+    <div class="dx" id="dx"></div>
+  </section>
+
+  <section>
+    <div class="games">
+      <div><h2>🏎️ מירוץ קליקים</h2><div class="game"><div class="ctime" id="ctime">10.0</div><button class="clicker" type="button" id="clicker">התחל!</button><div class="gscore" id="cres">כמה קליקים תעשה ב-10 שניות?</div><div style="margin-top:12px"><button class="btn" type="button" id="cshare" style="display:none;background:var(--orange);font-size:15px">📋 העתק תוצאה לוואטסאפ</button></div></div></div>
+      <div><h2>🔴 הכפתור האדום</h2><div class="redzone"><button class="redbtn" type="button" id="redBtn">אל<br>תלחצו!</button><div class="redmsg" id="redMsg" aria-live="polite"></div><div class="redcount" id="redCount"></div></div></div>
+    </div>
+  </section>
+
+
+  <section>
+    <h2>🔮 הורוסקופ גיימרים</h2>
+    <p class="sub">מה הכוכבים צופים לכל אחד. בלי אחריות.</p>
+    <div class="horo" id="horo"></div>
+  </section>
+
+  <section>
+    <h2>📊 גרף השבועות</h2>
+    <p class="sub">כמה שעות כל אחד שיחק, שבוע אחרי שבוע.</p>
+    <div class="tabs" id="chartTabs"><button type="button" data-s="glow" aria-pressed="true">🌊 שטחים זוהרים</button><button type="button" data-s="bars" aria-pressed="false">📊 עמודות</button><button type="button" data-s="rank" aria-pressed="false">🏆 דירוג</button><button type="button" data-s="lines" aria-pressed="false">📈 קווים</button></div>
+    <div class="chart"><div class="fig"><svg id="chart" role="img" aria-label="גרף שעות משחק לפי שבועות"></svg></div><div class="legend" id="legend"></div></div>
+  </section>
+
+  <section>
+    <h2>🏁 מרוץ המלכים</h2>
+    <p class="sub">איך הדירוג השתנה מיום ראשון ועד היום. מי עקף את מי?</p>
+    <div class="race"><div class="top"><span class="day" id="raceDay">יום ראשון</span><button class="btn" type="button" id="racePlay">▶ הפעל מרוץ</button></div><div class="track" id="raceTrack"></div></div>
+  </section>
+
+  <section>
+    <h2>🔥 מד הטילט</h2>
+    <p class="sub">כמה החבורה מכורה השבוע, לפי סך השעות.</p>
+    <div class="tilt" id="tilt"></div>
+  </section>
+
+
+  <section>
+    <h2>שעות השבוע</h2>
+    <p class="sub">מיום ראשון ועד עכשיו.</p>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <section>
+    <h2>פקודות הבוט בקבוצה</h2>
+    <p class="sub">כותבים בוואטסאפ, הבוט עונה.</p>
+    <div class="cmds">
+      <div class="cmd"><code>!מי</code><p>מי ב-GTA עכשיו ומי מחובר במשהו אחר.</p></div>
+      <div class="cmd"><code>!שבוע</code><p>הדירוג של השבוע עד עכשיו.</p></div>
+      <div class="cmd"><code>!דין אדיר</code><p>משפט בקבוצה. כולם כותבים אשם או זכאי, ואחרי 3 דקות יש גזר דין.</p></div>
+      <div class="cmd"><code>!קללה / !מחמאה</code><p>קללה מצחיקה או מחמאה מוגזמת לחבר. למשל: !קללה אסף</p></div>
+      <div class="cmd"><code>!תשאל</code><p>כדור הבדולח של הבוט עונה על כל שאלה 🎱</p></div>
+      <div class="cmd"><code>אוטומטי</code><p>הודעה כשמישהו נכנס או יוצא, סיכום בכל מוצאי שבת ב-21:00.</p></div>
+    </div>
+    <p class="note" id="note"></p>
+  </section>
+</main>
+<dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
+<dialog id="certDlg" style="width:min(820px,94vw)"><div class="dlg"><img id="certImg" alt="תעודת מלך השבוע" style="width:100%;border-radius:10px;display:block"><p style="color:var(--mute);font-size:14px;margin:10px 0">בטלפון: לחיצה ארוכה על התמונה ← שמירה. במחשב: כפתור ההורדה.</p><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><a class="btn" id="certDl" download="תעודה-מלך-השבוע.png" style="display:grid;place-items:center;text-decoration:none;font-size:15px">⬇ הורדה</a><button class="btn" type="button" id="certAgain" style="background:var(--orange);font-size:15px">🔄 נוסח אחר</button><button class="btn" type="button" id="certClose" style="background:var(--teal);color:#062a27;font-size:15px">סגור</button></div></div></dialog>
+<footer>צוות לוסיה · נבנה עם הבוט של אושרי 🤖</footer>
+
+<script>
+{
+/* ===== כאן עורכים את התוכן של האתר ===== */
+const PROFILES={
+  "אדיר":{role:"הנהג הראשי",car:"מכונית ספורט אדומה",quote:"עוד סיבוב אחד ואני הולך לישון",color:"#ff2e88",icon:"🏎️",birthday:""},
+  "נהוראי":{role:"מומחה המרדפים",car:"אופנוע",quote:"איזה שליטה כל הכביש",color:"#19d3c5",icon:"🏍️",birthday:""},
+  "אושרי":{role:"מנהל הבוט",car:"ג'יפ שחור",quote:"הבוט רואה הכול",color:"#ffd166",icon:"🤖",birthday:""},
+  "מלאכי":{role:"הצלף",car:"מסוק",quote:"",color:"#ff8a3d",icon:"🎯",birthday:""},
+  "אסף":{role:"המתחזק",car:"טנדר",quote:"גם אני מחובר",color:"#b18cff",icon:"🛻",birthday:""}
+  /* color = צבע הכרטיס · icon = האייקון שלו · birthday = יום הולדת בפורמט "MM-DD", למשל "03-14" */
+};
+const JOKES=[
+  "כמה גיימרים צריך כדי להחליף נורה? אף אחד. מחכים לעדכון.",
+  "אמרתי לאמא שאני רק בודק משהו במשחק. זה היה לפני ארבע שעות.",
+  "הרכב הכי בטוח ב-GTA? זה שעוד לא נהגת בו.",
+  "100% מהשודים מצליחים, עד שמישהו אומר \"יש לי רעיון\".",
+  "למה המסוק תמיד מתרסק? כי מישהו אמר \"תן לי לנסות רגע\".",
+  "חוק טבע: ברגע שהחלטת ללכת לישון, כולם מתחברים.",
+  "בשביל מה יש GPS במשחק? כדי שיהיה את מי להאשים.",
+  "המשטרה בעיר רודפת אחרינו יותר ממה שאנחנו רודפים אחרי החלומות שלנו.",
+  "\"עוד סיבוב אחד\" זו יחידת זמן של בערך שלוש שעות."
+];
+const HORO=[
+  "הכוכבים מראים מרדף משטרתי. אל תסמוך על המסוק.",
+  "יום טוב לשוד. יום רע לשותפים שלך.",
+  "מישהו בחבורה יבגוד בך הערב. כנראה עם אופנוע.",
+  "תימנע מרכבים אדומים היום. אין סיבה, פשוט תימנע.",
+  "הירח במזל טילט. קח הפסקה של 5 דקות כל 4 שעות.",
+  "צפוי לך מזל גדול בכסף. רק בתוך המשחק, לצערנו.",
+  "השבוע תגלה כישרון חדש: ליפול מגשרים.",
+  "אדם קרוב יבקש ממך \"עוד סיבוב אחד\". תסרב. (לא תסרב.)",
+  "נוגה במזל מוסך. זה הזמן לצבוע את הרכב בוורוד.",
+  "הכוכבים ממליצים לשתות מים. גם בין שוד לשוד."
+];
+const CERT_SUB=["מוענקת בזאת בגאווה (ובדאגה קלה) ל","מוענקת בזאת בהתרגשות (ובחשש לבריאותו) ל","מוענקת בזאת בטקס חגיגי (בוואטסאפ) ל","מוענקת בזאת, בלית ברירה, ל"];
+const CERT_WHY=[
+  "על התרומה יוצאת הדופן להזנחת השינה, האוכל והמשפחה",
+  "על שבוע שלם בלי לראות את אור השמש",
+  "על שבירת השיא האישי בכמות ה\"עוד סיבוב אחד\"",
+  "על כך שהמשטרה בעיר כבר מכירה אותו בשמו הפרטי",
+  "על נאמנות בלתי מתפשרת לספה ולשלט",
+  "על כך שהמשפחה תלתה תמונה שלו על המקרר, כדי לזכור איך הוא נראה",
+  "על הפיכת \"אני כבר הולך לישון\" לאמנות"
+];
+const CERT_FINE=["תוקף התעודה: עד שמישהו אחר יעקוף","התעודה אינה ניתנת להמרה בפיצה","אין לתלות את התעודה ליד ההורים","התעודה בתוקף כל עוד יש חשמל","העתק נאמן למקור. המקור אצל הבוט"];
+const ROTATION="visit"; /* "visit" = כותרות חדשות בכל כניסה לאתר · "time" = מבוקש כל שעה, עיתון כל רבע שעה */
+const NIGHT=null; /* ערב משחק קבוע, לדוגמה: {day:4, hour:21, text:"ערב GTA של חמישי"}  (0=ראשון … 6=שבת) */
+/* ======================================== */
+const COLORS=["#ff2e88","#19d3c5","#ffd166","#ff8a3d","#b18cff","#7ee081","#ff6b6b"];
+const SAMPLE={members:[
+  {name:"אדיר",hours:14.2,sessions:9,online:true,game:"GTA",title:"חיית הלילה",daysAway:0,latestHour:3},
+  {name:"נהוראי",hours:8.5,sessions:6,online:true,game:"GTA",title:"הנהג הכי מסוכן",daysAway:0,latestHour:1},
+  {name:"אושרי",hours:6.1,sessions:4,online:false,game:"",title:"בונה הבוטים",daysAway:1,latestHour:23},
+  {name:"מלאכי",hours:4.8,sessions:5,online:true,game:"Valorant",title:"השקט המסוכן",daysAway:2,latestHour:22},
+  {name:"אסף",hours:2.3,sessions:12,online:false,game:"",title:"בדרך לחזור",daysAway:6,latestHour:20}],
+  pairs:[{a:"אדיר",b:"נהוראי",hours:6.5},{a:"אדיר",b:"אושרי",hours:3.2},{a:"נהוראי",b:"מלאכי",hours:2.1},{a:"אדיר",b:"מלאכי",hours:1.8},{a:"אושרי",b:"אסף",hours:0.9},{a:"נהוראי",b:"אושרי",hours:0.7}],
+  heat:Array.from({length:7},(_,d)=>Array.from({length:24},(_,h)=>{const ev=h>=19&&h<=23?1:h>=0&&h<=2?.7:h>=15&&h<19?.35:h>=3&&h<12?0:.1;const day=d===4||d===6?1.5:d===5?.4:1;return Math.round(ev*day*120*(.7+((d*7+h*13)%10)/20))})),
+  days:[{day:0,hours:{"אדיר":1.5,"נהוראי":2.5,"אושרי":1,"מלאכי":0.5,"אסף":1}},{day:1,hours:{"אדיר":3,"נהוראי":4,"אושרי":1.5,"מלאכי":1.5,"אסף":1.3}},{day:2,hours:{"אדיר":6,"נהוראי":4.5,"אושרי":2.5,"מלאכי":2,"אסף":1.6}},{day:3,hours:{"אדיר":9,"נהוראי":6,"אושרי":4,"מלאכי":3.5,"אסף":2}},{day:4,hours:{"אדיר":14.2,"נהוראי":8.5,"אושרי":6.1,"מלאכי":4.8,"אסף":2.3}}],
+  history:[
+    {week:"2026-10-25",hours:{"אדיר":9.5,"נהוראי":11,"אושרי":4,"מלאכי":6.5,"אסף":7}},
+    {week:"2026-11-01",hours:{"אדיר":12,"נהוראי":9,"אושרי":5.5,"מלאכי":3,"אסף":6}},
+    {week:"2026-11-08",hours:{"אדיר":10.5,"נהוראי":7.5,"אושרי":7,"מלאכי":5,"אסף":4.5}},
+    {week:"2026-11-15",hours:{"אדיר":15,"נהוראי":10,"אושרי":6.5,"מלאכי":4,"אסף":3}}]};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const num=v=>{const n=Number(v);return Number.isFinite(n)?n:0};
+const $=id=>document.getElementById(id);
+let lastData=null,lastSample=false;
+function render(data,isSample){
+  lastData=data;lastSample=isSample;
+  const crew=(Array.isArray(data.members)?data.members:[]).map((m,i)=>({name:String(m.name||"?"),hours:num(m.hours),sessions:num(m.sessions),online:!!m.online,game:String(m.game||""),title:String(m.title||""),daysAway:m.daysAway==null?null:num(m.daysAway),latestHour:m.latestHour==null?null:num(m.latestHour),c:(PROFILES[String(m.name)]||{}).color||COLORS[i%COLORS.length],icon:(PROFILES[String(m.name)]||{}).icon||""}));
+  const sorted=crew.slice().sort((a,b)=>b.hours-a.hours);
+  const inGta=crew.filter(m=>m.online&&m.game==="GTA"),other=crew.filter(m=>m.online&&m.game!=="GTA");
+  $("online").innerHTML=`<span><span class="dot"></span>ב-GTA עכשיו:</span>${inGta.map(m=>`<span class="chip">${esc(m.name)}</span>`).join("")||"<span>אף אחד</span>"}${other.length?`<span>· מחוברים: ${other.map(m=>esc(m.name)+(m.game?" ("+esc(m.game)+")":"")).join(", ")}</span>`:""}`;
+  const total=sorted.reduce((t,m)=>t+m.hours,0),k=sorted[0];
+  certKing=k&&k.hours>0?k:null;certTotal=total;$("certBtn").style.display=certKing?"":"none";
+  $("king").innerHTML=k&&k.hours>0?`<div class="crown">${esc(k.name[0])}</div><div><b>${esc(k.name)}</b><div class="stats"><div><strong>${k.hours} ש'</strong>השבוע</div><div><strong>${k.sessions}</strong>כניסות</div><div><strong>${Math.round(k.hours/total*100)}%</strong>מכל השעות של החבורה</div></div></div>`:`<div class="crown">?</div><div><b>עוד אין מלך</b><div class="stats">השבוע רק התחיל. מי ייכנס ראשון?</div></div>`;
+  lastCrew=crew;
+  $("crew").innerHTML=crew.map((m,i)=>`<article class="card" tabindex="0" role="button" data-i="${i}" aria-label="פרופיל של ${esc(m.name)}"><span class="st ${m.online?"on":"off"}">${m.online?"● "+esc(m.game||"מחובר"):"○ לא מחובר"}</span><div class="av" style="background:${m.c}">${esc(m.icon||m.name[0])}</div><h3>${esc(m.name)}</h3>${m.title?`<span class="tag">${esc(m.title)}</span>`:""}<dl><div><dt>שעות השבוע</dt><dd>${m.hours}</dd></div><div><dt>כניסות</dt><dd>${m.sessions}</dd></div></dl></article>`).join("");
+  const max=Math.max(...sorted.map(m=>m.hours),0.1);
+  $("bars").innerHTML=sorted.map((m,i)=>`<div class="bar"><span>${["🥇","🥈","🥉"][i]||"  "} ${esc(m.name)}</span><div class="tr"><i style="width:${Math.round(m.hours/max*100)}%"></i></div><span>${m.hours} ש'</span></div>`).join("");
+  funRender(crew);
+  extrasRender(crew,data);
+  raceRender(crew,data);
+  radioRender(crew,data);
+  willsRender(crew,data);
+  trailerRender(crew);
+  archiveRender(data);
+  dxRender(crew);
+  themeRender(crew);
+  let note="";
+  if(isSample) note="כרגע מוצגים נתוני דוגמה. ברגע שהבוט יעלה את הנתונים, יוצגו המספרים האמיתיים.";
+  else if(data.updated){const mins=Math.round((Date.now()-new Date(data.updated))/60000);note=`עודכן ${mins<1?"עכשיו":"לפני "+mins+" דק'"} ע"י הבוט.`+(mins>30?" (ייתכן שהמחשב של הבוט כבוי)":"");}
+  $("note").textContent=note;
+}
+let lastCrew=[];
+const rng=seed=>()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+let VISIT=Math.floor(Math.random()*1e9); /* מתחלף בכל כניסה לאתר, וגם כשחוזרים ללשונית */
+
+function extrasRender(crew,data){
+  const r=rng(VISIT+7);
+  const pick=(arr)=>arr[Math.floor(r()*arr.length)];
+  const byH=crew.slice().sort((a,b)=>b.hours-a.hours),k=byH[0],second=byH[1]||byH[0];
+  const avgH=crew.reduce((t,m)=>t+m.hours,0)/crew.length||1;
+  // ticker
+  const items=crew.map(m=>{const price=Math.round(50+m.hours*12);const ch=Math.round((m.hours-avgH)/avgH*100);return`<span>${esc(m.name)} <small>₪${price}</small> <b class="${ch>=0?"up":"dn"}">${ch>=0?"▲":"▼"} ${Math.abs(ch)}%</b></span>`}).join("");
+  const label=`<span>📈 בורסת לוסיה</span>`;
+  $("ticker").innerHTML=label+items+label+items;
+  // horoscope
+  const hs=shuffleR(HORO,VISIT+3);
+  $("horo").innerHTML=crew.map((m,i)=>`<div><b>${esc(m.name)}</b><span>${["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"][(m.name.charCodeAt(0)+i)%12]} מזל גיימר</span><p>${esc(hs[i%hs.length])}</p></div>`).join("");
+  // letters + joke inside the paper
+  const avg=m=>m.sessions?Math.round(m.hours*60/m.sessions):0;
+  const tour=crew.filter(m=>m.sessions>0).sort((a,b)=>avg(a)-avg(b))[0]||k;
+  const w=crew.slice().sort((a,b)=>(b.daysAway??0)-(a.daysAway??0)||a.hours-b.hours)[0];
+  const L=[
+    `אמא של ${k.name} כותבת: "מתי הוא יוצא מהחדר? האוכל מתקרר כבר שלוש שעות"`,
+    `המשטרה כותבת: "אנחנו מבקשים מ${k.name} להאט. נגמרו לנו הניידות"`,
+    `תושב העיר כותב: "מישהו יכול להגיד ל${second.name} להפסיק לדרוס את הקיוסקים?"`,
+    `${tour.name} כותב: "אני נכנס לכמה דקות כי אני עסוק. אל תשפטו"`,
+    `${w.name} כותב: "לא נעלמתי, פשוט היו לי חיים לכמה ימים. מצטער"`,
+    `בעל המוסך כותב: "תודה לחבורה. בזכותכם קניתי וילה"`
+  ];
+  const ls=shuffleR(L,VISIT+11).slice(0,2);
+  const paper=$("paper");
+  paper.insertAdjacentHTML("beforeend",`<div class="letters"><b>💌 מכתבים למערכת</b>${ls.map(l=>`<p>${esc(l)}</p>`).join("")}</div><div class="joke"><b>😂 בדיחת היום</b>${esc(pick(JOKES))}</div>`);
+  // weekly chart
+  histData=(Array.isArray(data.history)?data.history:[]).filter(h=>h&&h.hours).slice(-7);
+  histData.push({week:"השבוע",hours:Object.fromEntries(crew.map(m=>[m.name,m.hours]))});
+  histCrew=crew;
+  drawChart();
+}
+function shuffleR(arr,seed){const r=rng(seed),x=arr.slice();for(let i=x.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
+let histData=[],histCrew=[];
+let chartStyle="glow";
+$("chartTabs").addEventListener("click",e=>{const bt=e.target.closest("button");if(!bt)return;chartStyle=bt.dataset.s;[...$("chartTabs").children].forEach(x=>x.setAttribute("aria-pressed",x===bt));drawChart()});
+function smooth(P){if(P.length<3)return P.map((p,i)=>`${i?"L":"M"}${p[0]},${p[1]}`).join("");let d=`M${P[0][0]},${P[0][1]}`;for(let i=0;i<P.length-1;i++){const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||p2;const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];d+=`C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`}return d}
+function drawChart(){
+  const svg=$("chart"),W=svg.clientWidth,H=svg.clientHeight;if(!W||!H||!histCrew.length)return;
+  const pts=histData,n=pts.length;
+  $("legend").innerHTML=histCrew.map(m=>`<span><i style="background:${m.c}"></i>${esc(m.name)}</span>`).join("");
+  if(n<2){svg.innerHTML=`<text x="${W/2}" y="${H/2}" fill="#c4b2e0" text-anchor="middle" font-family="Rubik" font-size="16">הגרף יתמלא אחרי שבוע-שבועיים של נתונים</text>`;return}
+  const val=(p,m)=>Number(p.hours[m.name])||0;
+  const pad={l:16,r:44,t:18,b:34},iw=W-pad.l-pad.r,ih=H-pad.t-pad.b,small=W<520;
+  const lbl=p=>p.week==="השבוע"?"השבוע":new Date(p.week).toLocaleDateString("he-IL",{day:"numeric",month:"numeric"});
+  let g="";
+  const xLabels=X=>pts.forEach((p,i)=>{if(small&&i%2&&i!==n-1)return;g+=`<text x="${X(i)}" y="${H-10}" fill="#c4b2e0" font-size="12" text-anchor="middle" font-family="Rubik">${esc(lbl(p))}</text>`});
+  const yGrid=(max,Y)=>{const step=max>40?20:max>20?10:5;for(let v=0;v<=max;v+=step)g+=`<line x1="${pad.l}" x2="${W-pad.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="#3a2763"/><text x="${W-pad.r+8}" y="${Y(v)+4}" fill="#c4b2e0" font-size="12" font-family="Rubik">${v}</text>`};
+  if(chartStyle==="bars"){
+    const sums=pts.map(p=>histCrew.reduce((t,m)=>t+val(p,m),0)),max=Math.max(1,...sums)*1.08;
+    const Y=v=>pad.t+(1-v/max)*ih,band=iw/n,bw=Math.min(64,band*.62),X=i=>W-pad.r-(i+.5)*band;
+    yGrid(max,Y);xLabels(X);
+    pts.forEach((p,i)=>{let acc=0;histCrew.forEach(m=>{const v=val(p,m);if(!v)return;const y1=Y(acc+v),y0=Y(acc);g+=`<rect x="${X(i)-bw/2}" y="${y1}" width="${bw}" height="${Math.max(0,y0-y1-1.5)}" rx="4" fill="${m.c}"><title>${esc(m.name)}: ${v}</title></rect>`;acc+=v});g+=`<text x="${X(i)}" y="${Y(acc)-6}" fill="#fff3ea" font-size="13" font-weight="800" text-anchor="middle" font-family="Rubik">${Math.round(acc)}</text>`});
+  }else if(chartStyle==="rank"){
+    const k=histCrew.length,Y=r=>pad.t+12+r*((ih-24)/Math.max(1,k-1)),X=i=>W-pad.r-20-i/(n-1)*(iw-(small?70:110));
+    const ranks=pts.map(p=>histCrew.slice().sort((a,b)=>val(p,b)-val(p,a)).map(m=>m.name));
+    for(let r=0;r<k;r++)g+=`<text x="${W-pad.r+14}" y="${Y(r)+5}" fill="#c4b2e0" font-size="13" font-weight="800" font-family="Rubik">${r+1}</text>`;
+    xLabels(X);
+    histCrew.forEach(m=>{const P=ranks.map((rk,i)=>[X(i),Y(rk.indexOf(m.name))]);g+=`<path d="${smooth(P)}" fill="none" stroke="${m.c}" stroke-width="5" stroke-linecap="round" opacity=".9"/>`+P.map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${i===n-1?10:6}" fill="${m.c}" stroke="#251744" stroke-width="3"/>`).join("");const [lx,ly]=P[n-1];g+=`<text x="${lx-16}" y="${ly+5}" fill="${m.c}" font-size="14" font-weight="900" text-anchor="start" direction="rtl" font-family="Rubik">${esc(m.name)}</text>`});
+  }else{
+    const max=Math.max(1,...pts.flatMap(p=>histCrew.map(m=>val(p,m))))*1.1;
+    const X=i=>W-pad.r-i/(n-1)*iw,Y=v=>pad.t+(1-v/max)*ih;
+    yGrid(max,Y);xLabels(X);
+    if(chartStyle==="glow"){
+      g+=`<defs><filter id="gl" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>${histCrew.map((m,i)=>`<linearGradient id="ga${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${m.c}" stop-opacity=".35"/><stop offset="1" stop-color="${m.c}" stop-opacity="0"/></linearGradient>`).join("")}</defs>`;
+      histCrew.forEach((m,i)=>{const P=pts.map((p,j)=>[X(j),Y(val(p,m))]);const d=smooth(P);g+=`<path d="${d}L${X(n-1)},${Y(0)}L${X(0)},${Y(0)}Z" fill="url(#ga${i})"/><path d="${d}" fill="none" stroke="${m.c}" stroke-width="3.5" filter="url(#gl)"/><circle cx="${P[n-1][0]}" cy="${P[n-1][1]}" r="6" fill="${m.c}" filter="url(#gl)"/>`});
+    }else{
+      histCrew.forEach(m=>{const vals=pts.map(p=>val(p,m));g+=`<path d="${vals.map((v,i)=>`${i?"L":"M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join("")}" fill="none" stroke="${m.c}" stroke-width="3" stroke-linejoin="round"/>`+vals.map((v,i)=>`<circle cx="${X(i)}" cy="${Y(v)}" r="${i===n-1?5:3}" fill="${m.c}"/>`).join("")});
+    }
+  }
+  svg.innerHTML=g;
+}
+new ResizeObserver(drawChart).observe($("chart"));
+function dayNight(){const h=new Date().getHours();document.body.classList.toggle("tod-day",h>=6&&h<17);document.body.classList.toggle("tod-night",h>=20||h<6)}
+dayNight();setInterval(dayNight,600000);
+
+
+let certKing=null,certTotal=0,certSeed=0;
+async function makeCert(){
+  const k=certKing;if(!k)return;
+  try{await Promise.all([document.fonts.load('900 60px Rubik'),document.fonts.load('900 60px "Frank Ruhl Libre"'),document.fonts.load('500 30px "Frank Ruhl Libre"')])}catch(e){}
+  const r=rng(certSeed),pick=a=>a[Math.floor(r()*a.length)];
+  const W=1200,H=850,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  x.fillStyle="#1a0f2e";x.fillRect(0,0,W,H);
+  x.fillStyle="#f7efdc";x.beginPath();x.roundRect?x.roundRect(30,30,1140,790,10):x.rect(30,30,1140,790);x.fill();
+  const gr=x.createLinearGradient(30,0,1170,0);["#ff2e88","#ff8a3d","#ffd166","#19d3c5"].forEach((col,i)=>gr.addColorStop(i/3,col));x.fillStyle=gr;x.fillRect(30,30,1140,14);
+  x.strokeStyle="#b8862b";x.lineWidth=2;x.strokeRect(46,46,1108,758);x.strokeRect(52,52,1096,746);x.strokeStyle="#e2c48a";x.strokeRect(62,62,1076,726);
+  x.direction="rtl";x.textAlign="center";const cx=W/2;
+  const T=(t,font,col,y)=>{x.font=font;x.fillStyle=col;x.fillText(t,cx,y)};
+  T("★ צוות לוסיה ★ תעודה רשמית ★","700 20px Rubik","#b8862b",118);
+  T("תעודת הוקרה",'900 76px "Frank Ruhl Libre", serif',"#2a1640",190);
+  T(pick(CERT_SUB),"400 24px Rubik","#5a4470",235);
+  x.font="900 120px Rubik";x.fillStyle="#2a1640";x.fillText(k.name,cx+4,360);x.fillStyle="#ff2e88";x.fillText(k.name,cx,356);
+  T("על זכייתו בתואר 👑 מלך השבוע","700 26px Rubik","#2a1640",420);
+  const why=pick(CERT_WHY);x.font="400 26px Rubik";
+  if(x.measureText(why).width>980){const w=why.split(" "),h=Math.ceil(w.length/2);T(w.slice(0,h).join(" "),"400 26px Rubik","#2a1640",460);T(w.slice(h).join(" "),"400 26px Rubik","#2a1640",496)}else T(why,"400 26px Rubik","#2a1640",462);
+  const st=[[`${k.hours}`,"שעות ב-GTA"],[`${k.sessions}`,"כניסות"],[`${certTotal?Math.round(k.hours/certTotal*100):0}%`,"מכל השעות של החבורה"]];
+  st.forEach(([v,l],i)=>{const sx=cx+(1-i)*170;x.textAlign="center";x.font="900 40px Rubik";x.fillStyle="#2a1640";x.fillText(v,sx,560);x.font="400 18px Rubik";x.fillStyle="#5a4470";x.fillText(l,sx,586)});
+  const wk=new Date();wk.setDate(wk.getDate()-wk.getDay());const we=new Date(wk);we.setDate(wk.getDate()+6);
+  T(`השבוע של ${wk.getDate()}.${wk.getMonth()+1} עד ${we.getDate()}.${we.getMonth()+1} · ${pick(CERT_FINE)}`,"400 15px Rubik","#9a87ad",622);
+  // seal
+  x.beginPath();x.arc(cx,705,75,0,Math.PI*2);x.fillStyle="#ffd166";x.fill();x.lineWidth=6;x.strokeStyle="#b8862b";x.stroke();
+  x.beginPath();x.arc(cx,705,58,0,Math.PI*2);x.lineWidth=3;x.stroke();
+  x.font="64px serif";x.fillText("👑",cx,728);
+  // signatures
+  const sig=(sx,name,role)=>{x.strokeStyle="#2a1640";x.lineWidth=2;x.beginPath();x.moveTo(sx-120,700);x.lineTo(sx+120,700);x.stroke();x.textAlign="center";x.font='italic 500 28px "Frank Ruhl Libre", serif';x.fillStyle="#2a1640";x.fillText(name,sx,730);x.font="400 17px Rubik";x.fillStyle="#5a4470";x.fillText(role,sx,758)};
+  sig(960,"הבוט 🤖","ועדת הפרסים");sig(240,"אושרי",'יו"ר החבורה');
+  const url=c.toDataURL("image/png");$("certImg").src=url;$("certDl").href=url;
+}
+function openCert(){$("certImg").alt="תעודת מלך השבוע";$("certDl").download="תעודה-מלך-השבוע.png";certSeed=Math.floor(Math.random()*1e9);makeCert();const d=$("certDlg");try{d.showModal()}catch(e){d.setAttribute("open","")}}
+$("certBtn").addEventListener("click",openCert);
+$("certAgain").addEventListener("click",()=>{certSeed=Math.floor(Math.random()*1e9);makeCert()});
+$("certClose").addEventListener("click",()=>{const d=$("certDlg");try{d.close()}catch(e){d.removeAttribute("open")}});
+
+
+
+function hebDate(d){try{const p=new Intl.DateTimeFormat("en-u-ca-hebrew",{day:"numeric",month:"long"}).formatToParts(d);return{day:+p.find(x=>x.type==="day").value,month:p.find(x=>x.type==="month").value}}catch(e){return null}}
+function themeRender(crew){
+  const now=new Date(),hd=hebDate(now),md=String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+  let th=null;
+  const force=(location.hash.match(/^#theme-([a-z]+)$/)||[])[1];
+  const bday=crew.find(m=>(PROFILES[m.name]||{}).birthday===md);
+  if(force)th=force;
+  else if(bday)th="birthday";
+  else if(hd){const m=hd.month,d=hd.day;
+    if((m==="Kislev"&&d>=25)||(m==="Tevet"&&d<=2))th="hanukkah";
+    else if((m==="Adar"||m==="Adar II")&&d===14)th="purim";
+    else if(m==="Tishri"&&d<=2)th="roshhashana";
+    else if(m==="Nisan"&&d>=15&&d<=21)th="pesach";}
+  const T={hanukkah:["🕎 חנוכה שמח מצוות לוסיה! שמונה ימים של שוד לאור הנרות","🕎🍩✨","#4da3ff"],
+    purim:["🎭 פורים שמח! היום כולם מחופשים לשוטרים","🎭🎉🎊","#ff3ec8"],
+    roshhashana:["🍎 שנה טובה ומתוקה! שיהיו לנו יותר שודים מוצלחים","🍎🍯✨","#ffc94d"],
+    pesach:["🍷 חג פסח שמח! השבוע במשחק: רק מצות, בלי לחם","🍷🌸✨","#9fd0ff"],
+    birthday:[`🎂 מזל טוב ל${bday?bday.name:"חבר מהצוות"}! היום הוא מלך הכבוד`,"🎂🎈🎉","#ffe066"]};
+  document.body.className=document.body.className.replace(/\bth-\w+/g,"").replace(/\bhas-theme\b/g,"").trim();
+  if(!th||!T[th]){$("fx").innerHTML="";return}
+  document.body.classList.add("has-theme","th-"+th);
+  const[txt,em,bg]=T[th];const b=$("themeBanner");b.textContent=txt;b.style.setProperty("--theme-bg",bg);
+  const e=[...em];$("fx").innerHTML=Array.from({length:18},(_,i)=>`<span style="left:${(i*37)%100}%;animation-duration:${6+(i%5)}s;animation-delay:${-(i*1.3)}s">${e[i%e.length]}</span>`).join("");
+}
+addEventListener("hashchange",()=>themeRender(lastCrew));
+
+
+/* ===== race ===== */
+let raceDays=[],raceCrew=[],raceIdx=0,raceTimer=null;
+const DAYN=["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+function raceShow(i){
+  const d=raceDays[i];if(!d)return;raceIdx=i;
+  $("raceDay").textContent="יום "+DAYN[d.day]+(i===raceDays.length-1?" (היום)":"");
+  const vals=raceCrew.map(m=>({m,v:Number(d.hours[m.name])||0})).sort((a,b)=>b.v-a.v);
+  const max=Math.max(1,...raceDays.flatMap(x=>Object.values(x.hours).map(Number)));
+  const tr=$("raceTrack");tr.style.height=(raceCrew.length*46)+"px";
+  if(tr.children.length!==raceCrew.length)tr.innerHTML=raceCrew.map(m=>`<div class="rrow" data-n="${esc(m.name)}"><span>${esc((m.icon||"")+" "+m.name)}</span><div><div class="b" style="background:${m.c}"></div></div></div>`).join("");
+  vals.forEach(({m,v},rank)=>{const row=[...tr.children].find(r=>r.dataset.n===m.name);if(!row)return;row.style.top=(rank*46)+"px";const b=row.querySelector(".b");b.style.width=Math.max(8,v/max*100)+"%";b.textContent=(rank===0&&v>0?"👑 ":"")+v})
+}
+function raceRender(crew,data){
+  raceCrew=crew;raceDays=(Array.isArray(data.days)?data.days:[]).filter(d=>d&&d.hours).map(d=>({day:num(d.day)%7,hours:d.hours}));
+  if(!raceDays.length){$("raceTrack").innerHTML=`<p class="sub">המרוץ יתחיל ברגע שמישהו ישחק השבוע.</p>`;$("racePlay").style.display="none";return}
+  $("racePlay").style.display="";if(!raceTimer)raceShow(raceDays.length-1);
+}
+$("racePlay").addEventListener("click",()=>{clearInterval(raceTimer);let i=0;raceShow(0);raceTimer=setInterval(()=>{i++;if(i>=raceDays.length){clearInterval(raceTimer);raceTimer=null;return}raceShow(i)},1100)});
+/* ===== radio ===== */
+let radioMsgs=[],radioI=0;
+function radioRender(crew,data){
+  const on=crew.filter(m=>m.online&&m.game==="GTA"),k=crew.slice().sort((a,b)=>b.hours-a.hours)[0];
+  const M=[];
+  if(on.length>=3)M.push(`דיווח חם: ${on.map(m=>m.name).join(", ")} בעיר ביחד. צפו לבלגן ברחובות 🚨`);
+  else if(on.length===2)M.push(`עדכון תנועה: ${on[0].name} ו${on[1].name} נוסעים ביחד. מומלץ להתרחק מהכבישים 🚗`);
+  else if(on.length===1)M.push(`${on[0].name} לבד בעיר. שמענו שהוא מחפש שותף לשוד 👀`);
+  else M.push("שקט בעיר. כל הכנופיה כנראה בעבודה... או ישנה 😴");
+  const other=crew.filter(m=>m.online&&m.game&&m.game!=="GTA");
+  other.forEach(m=>M.push(`בגידה! ${m.name} נצפה משחק ב${m.game} 😱`));
+  if(k&&k.hours>0)M.push(`בטבלה: ${k.name} מוביל עם ${k.hours} שעות. מישהו יעצור אותו?`);
+  const p=(Array.isArray(data.pairs)?data.pairs:[])[0];if(p)M.push(`הצמד החם של השבוע: ${p.a} ו${p.b}, ${num(p.hours)} שעות ביחד 💞`);
+  if(Array.isArray(data.heat)){let bv=-1,bd=0,bh=0;data.heat.forEach((r,d)=>Array.isArray(r)&&r.forEach((v,h)=>{if(num(v)>bv){bv=num(v);bd=d;bh=h}}));if(bv>0)M.push(`טיפ מהמערכת: הכי הרבה אנשים מחוברים ביום ${DAYN[bd]} בסביבות ${String(bh).padStart(2,"0")}:00 ⏰`)}
+  M.push("📻 אתם מאזינים לרדיו לוסיה, התחנה היחידה שמשדרת רק שטויות");
+  radioMsgs=M;if(radioI>=M.length)radioI=0;$("radioMsg").textContent=M[radioI];
+}
+setInterval(()=>{if(!radioMsgs.length)return;radioI=(radioI+1)%radioMsgs.length;const el=$("radioMsg");el.style.opacity=0;setTimeout(()=>{el.textContent=radioMsgs[radioI];el.style.opacity=1},400)},6000);
+
+
+/* ===== wills ===== */
+function willsRender(crew,data){
+  const r=rng(VISIT+21),pick=a=>a[Math.floor(r()*a.length)];
+  const pairs=Array.isArray(data.pairs)?data.pairs:[];
+  const partner=m=>{const p=pairs.filter(x=>x.a===m.name||x.b===m.name).sort((a,b)=>num(b.hours)-num(a.hours))[0];return p?(p.a===m.name?p.b:p.a):null};
+  const others=m=>crew.filter(x=>x!==m);
+  const lowest=crew.slice().sort((a,b)=>a.hours-b.hours)[0];
+  const ITEMS=["את המקום שלי בספה","את הסיסמה לוויי-פיי","את השלט השני","את כל השעות שלא ישנתי","את הקללות שאמרתי על המשטרה במשחק","את האוזניות עם המיקרופון השבור","את הזכות להגיד \"עוד סיבוב אחד\""];
+  const WSTYLE=["a","b","c"][Math.floor(rng(VISIT+61)()*3)];
+  $("wills").innerHTML=crew.map(m=>{
+    const p=partner(m)||(others(m)[0]||m).name, o=others(m), car=(PROFILES[m.name]||{}).car||"הרכב שלי";
+    const heir2=o.length?pick(o).name:"הבוט", poor=lowest&&lowest!==m?lowest.name:(o[0]||m).name;
+    const lines=[`את ${car} אני מוריש ל<b>${esc(p)}</b>, כי רק הוא ידע לנהוג איתי ביחד.`,`${esc(pick(ITEMS))} אני מוריש ל<b>${esc(heir2)}</b>.`,`את ${m.hours} השעות שלי השבוע אני תורם ל<b>${esc(poor)}</b>, שצריך אותן יותר ממני.`];
+    if(WSTYLE==="b")return`<div class="wB"><div class="top"><span>מדינת לוסיה · בית המשפט לענייני ירושה</span><span>תיק ${1000+((m.name.charCodeAt(0)*13)%900)}/26</span></div><h3>צוואה ואישור משפטי</h3><ol>${lines.map(l=>`<li>${l}</li>`).join("")}</ol><div class="sg">חתימת המצווה: ${esc(m.name)} · עד: הבוט 🤖</div><div class="stamp">מאושר ✔</div></div>`;
+    if(WSTYLE==="c"){const tw=["תגידו לאמא שאכלתי 🙏","אל תמחקו לי את השמירה במשחק 💾","תגידו לבוט שסלחתי לו 🤖","תדאגו להשאיר לי מקום בספה 🛋️"];return`<div class="wC" style="--r:${(m.name.charCodeAt(0)%2?1:-1)*1.2}deg">אם אני לא חוזר מה-GTA...<br>${lines.join("<br>")}<br>${esc(pick(tw))}<br>— ${esc(m.name)}</div>`}
+    return`<div class="will"><h3>הצוואה של ${esc(m.name)}</h3><p>אני, ${esc(m.name)}, בהיותי בטילט מלא ובשליטה חלקית בשלט:</p>${lines.map(l=>`<p>• ${l}</p>`).join("")}<div class="sign">חתום: ${esc(m.name)} ${esc(m.icon||"")} · עד: הבוט 🤖</div></div>`}).join("");
+}
+/* ===== diagnosis ===== */
+function dxRender(crew){
+  const r=rng(VISIT+33),pick=a=>a[Math.floor(r()*a.length)];
+  const DSTYLE=["a","b","c"][Math.floor(rng(VISIT+71)()*3)];
+  const mx=Math.max(1,...crew.map(m=>m.hours));
+  const avg=m=>m.sessions?m.hours*60/m.sessions:0;
+  const late=m=>m.latestHour!=null&&m.latestHour<7;
+  $("dx").innerHTML=crew.map(m=>{
+    const D={
+      king:[["תסמונת 'עוד סיבוב' כרונית","המטופל טוען שהוא \"רק בודק משהו\" כבר כמה ימים."],["התמכרות חריפה לשלט","נצפה מחזיק שלט גם בזמן ארוחת ערב."],["דלקת אגודלים מתקדמת","האגודלים עובדים שעות נוספות בלי הפסקה."],["מחסור חמור בוויטמין D","לא ראה שמש מאז יום ראשון."],["פוביה מכפתור הכיבוי","המטופל מסרב להתקרב לכפתור הכיבוי של הקונסולה."]],
+      owl:[["אינסומניה גיימרית","נצפה ער ב-{h} כשהוא מסביר שזה \"עוד מוקדם\"."],["תסמונת הינשוף","הגוף שלו עובר לשעון של הלילה בכל פעם שהמשחק נדלק."],["עיוורון בוקר","לא זוכר מתי ראה בוקר בפעם האחרונה."],["הפרעת שינה מסוג 'רק עוד שוד'","הולך לישון ב-{h}, ובאופן מוזר מופתע שהוא עייף."]],
+      tourist:[["הפרעת קשב ממוקדת שלט","נכנס, אומר שלום, יוצא. חוזר על זה שוב ושוב."],["תסמונת הדלת המסתובבת","נכנס ויוצא מהמשחק כמו מחנות נוחות."],["אלרגיה לסשנים ארוכים","אחרי 12 דקות מתחילות אצלו תופעות לוואי."],["קוצר רוח גיימרי","לא מסוגל להישאר במשחק יותר מסיבוב אחד."]],
+      away:[["תסמונת החיים האמיתיים","המטופל נצפה מחוץ לבית. מצב מדאיג מאוד."],["דלקת עבודה חריפה","עובד יותר מדי, משחק פחות מדי."],["אמנזיה גיימרית","שכח את הסיסמה לחשבון PlayStation שלו."],["חשד לחברה חדשה","המטופל מבלה בחוץ, בחברת בני אדם."]],
+      ok:[["גיימר בריא (לעת עתה)","המדדים תקינים. ממשיכים במעקב."],["מאוזן באופן חשוד","משחק בדיוק כמה שצריך. זה לא טבעי."],["מקרה גבולי","עוד שבוע כזה והוא יעבור לקטגוריה המסוכנת."],["גיימר למופת","אפשר להציג אותו בשיעורי בריאות."]]
+    };
+    let cat="ok";
+    if(m.hours===mx&&m.hours>0)cat="king";
+    else if(late(m))cat="owl";
+    else if(m.sessions>=6&&avg(m)<20)cat="tourist";
+    else if((m.daysAway??0)>=3||m.hours<3)cat="away";
+    const hh=m.latestHour!=null?String(m.latestHour).padStart(2,"0")+":00":"";
+    let [dg,desc]=pick(D[cat]);desc=desc.replace("{h}",hh);
+    const sev=Math.max(1,Math.min(5,Math.round(m.hours/mx*5)));
+    const RX=["לשתות מים בין שוד לשוד","10 דקות אור שמש ביום","לשלוח הודעה לאמא","להחליף נעליים ולצאת לסיבוב (אמיתי)","לישון לפני 3 לפחות פעם בשבוע","לא לנהוג במסוק אחרי חצות","לאכול ירק אחד. גם אם במשחק","להניח את השלט לחמש דקות ולנשום","לדבר עם בן אדם אמיתי לפחות פעם ביום","לפתוח חלון ולבדוק שהעולם עדיין שם"];
+    const rx=pick(RX),num=1000+((m.name.charCodeAt(0)*7)%900);
+    if(DSTYLE==="b"){const FIND=["שלט PlayStation בתוך הלב","GPS במקום מוח","מחסור חמור בשמש","שריר אגודל מוגדל במיוחד","שעון ביולוגי שעובד לפי GTA"];return`<div class="dxB"><span class="tag">X-RAY · ${num}</span><div class="film">${esc(m.icon||"🎮")}</div><b>${esc(m.name)} · ממצא:</b> ${esc(pick(FIND))}.<p>אבחנה: ${esc(dg)}</p><p>💊 ${esc(rx)}</p></div>`}
+    if(DSTYLE==="c")return`<div class="dxC"><div class="hd"><span>ד"ר בוט · מרפאת לוסיה · תיק ${num}</span><span class="rx">℞</span></div><div class="pt">שם המטופל: ${esc(m.name)} ${esc(m.icon||"")}</div><div style="color:#c1121f;font-weight:700;font-size:15px">${esc(dg)}</div><div class="hw">${esc(rx)}. ${esc(desc)}</div><div class="sig">ד"ר בוט 🤖</div></div>`;
+    return`<div class="dxc"><div class="h"><span>🏥 מרפאת לוסיה</span><span>תיק מס' ${num}</span></div><h3>${esc(m.icon||"")} ${esc(m.name)}</h3><div class="dg">אבחנה: ${esc(dg)}</div><div class="sev" aria-label="חומרה ${sev} מתוך 5">${[1,2,3,4,5].map(i=>`<i class="${i<=sev?"on":""}"></i>`).join("")}</div><p>${esc(desc)}</p><div class="rx">💊 המלצת הרופא: ${esc(rx)}</div></div>`}).join("");
+}
+/* ===== red button ===== */
+const RED=["אמרנו לא ללחוץ 😐","שוב? באמת?","הבוט רשם את זה בתיק שלך 📝","אוקיי, עכשיו כל השוטרים בעיר מחפשים אותך 🚓","אתה יודע שזה לא עושה כלום, נכון?","טוב. לחיצה אחת נוספת ומשהו נורא יקרה.","...","נו, טוב שסיפרת. עכשיו כולם יודעים שאתה לא עומד בפיתויים","הודעה לאמא שלך נשלחה (סתם 😅)","מזל טוב! זכית ב... כלום 🎉","אתה לוחץ יותר ממה שאסף נכנס ל-GTA","הכפתור התעייף. תן לו לנוח 😮‍💨"];
+let redN=0;try{redN=+localStorage.getItem("lucia-red")||0}catch(e){}
+function redShow(){$("redCount").textContent=redN?`לחצת ${redN} פעמים. הבוט זוכר.`:"אף אחד לא לחץ... עדיין."}
+redShow();
+$("redBtn").addEventListener("click",()=>{redN++;try{localStorage.setItem("lucia-red",redN)}catch(e){}
+  const msg=redN<=RED.length?RED[redN-1]:RED[Math.floor(Math.random()*RED.length)];$("redMsg").textContent=msg;redShow();
+  const z=document.querySelector(".redzone");z.classList.remove("shake");void z.offsetWidth;z.classList.add("shake");
+  if(redN===7){$("redMsg").textContent="💥 הזהרנו אותך!";parade("🚓🚓🚓🚁🚓")}});
+/* ===== easter egg ===== */
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),3200)}
+function parade(em){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){toast("🏎️ מצאת את הסוד של צוות לוסיה!");return}
+  const p=document.createElement("div");p.className="parade";const e=[...em];
+  p.innerHTML=e.concat(e).map((c,i)=>`<span style="top:${10+(i*53)%75}vh;animation-duration:${2.4+(i%4)*.5}s;animation-delay:${i*.18}s">${c}</span>`).join("");
+  document.body.appendChild(p);setTimeout(()=>p.remove(),5200);
+}
+let typed="";
+document.addEventListener("keydown",e=>{if(e.target.closest("input,select,textarea"))return;typed=(typed+e.key.toLowerCase()).slice(-5);if(typed==="lucia"){parade("🏎️🏍️🚁🛻🚕🚤🚓");toast("🏎️ מצאת את הסוד של צוות לוסיה!");typed=""}});
+let taps=0,tapT=0;
+$("logo").addEventListener("click",()=>{const n=Date.now();taps=n-tapT<600?taps+1:1;tapT=n;if(taps>=5){taps=0;parade("🏎️🏍️🚁🛻🚕🚤🚓");toast("🏎️ מצאת את הסוד של צוות לוסיה!")}});
+/* ===== trailer ===== */
+let trailerLines=[],tlTimer=null;
+function trailerRender(crew){
+  const byH=crew.slice().sort((a,b)=>b.hours-a.hours),k=byH[0],s2=byH[1]||k,low=byH[byH.length-1];
+  const tot=Math.round(crew.reduce((t,m)=>t+m.hours,0));
+  trailerLines=["השבוע...",`בעיר אחת...`,`${crew.length} חברים...`,`${tot} שעות...`,`גבר אחד... ${k?k.name:""}...`,`${k?k.hours:0} שעות בלי לראות שמש.`,`${s2.name} מנסה לעצור אותו.`,`${low.name}... נעלם בלי להשאיר עקבות.`,"רק אחד יהיה מלך.",["צוות לוסיה","בקרוב בוואטסאפ שלכם"]];
+}
+function tlShow(i){
+  const el=$("tl"),l=trailerLines[i];el.classList.add("hide");
+  setTimeout(()=>{el.innerHTML=Array.isArray(l)?`${esc(l[0])}<small>${esc(l[1])}</small>`:esc(l);el.classList.remove("hide")},450);
+}
+$("tlPlay").addEventListener("click",()=>{clearInterval(tlTimer);let i=0;$("tlPlay").style.display="none";tlShow(0);tlTimer=setInterval(()=>{i++;if(i>=trailerLines.length){clearInterval(tlTimer);$("tlPlay").textContent="↻ שוב";$("tlPlay").style.display="";return}tlShow(i)},2100)});
+/* ===== archive ===== */
+function archiveRender(data){
+  const H=(Array.isArray(data.history)?data.history:[]).filter(h=>h&&h.hours).slice().reverse();
+  if(!H.length){$("archive").innerHTML=`<p class="sub">הארכיון יתחיל להתמלא אחרי השבוע הראשון.</p>`;return}
+  const T=[(k,h)=>`דרמה: ${k} ישב ${h} שעות ב-GTA, המשפחה מודאגת`,(k,h)=>`${k} מכתיר את עצמו: "${h} שעות זה רק חימום"`,(k,h)=>`היסטוריה: ${k} לוקח את הכתר עם ${h} שעות`,(k,h)=>`${k} לא יצא מהבית. ${h} שעות. החבורה בהלם`];
+  $("archive").innerHTML=H.map((w,i)=>{const rows=Object.entries(w.hours).map(([n,v])=>[n,Number(v)||0]).sort((a,b)=>b[1]-a[1]);const [k,h]=rows[0]||["?",0];const last=rows[rows.length-1];const tot=Math.round(rows.reduce((t,r)=>t+r[1],0));
+    const d=new Date(w.week);const lbl=isNaN(d)?esc(w.week):d.toLocaleDateString("he-IL",{day:"numeric",month:"long"});
+    return`<div class="cover" style="--r:${(i%2?1:-1)*1.2}deg"><div class="m"><b>ידיעות לוסיה</b><span>שבוע ${lbl}</span></div><h4>${esc(T[i%T.length](k,h))}</h4><p>${esc(last?`${last[0]} במקום האחרון עם ${last[1]} שעות`:"")}</p><p>${esc(`סה"כ החבורה: ${tot} שעות`)}</p></div>`}).join("");
+}
+/* ===== click race ===== */
+let cOn=false,cCount=0,cEnd=0,cTick=null,cBest=0;try{cBest=+localStorage.getItem("lucia-clicks")||0}catch(e){}
+const ctag=()=>cBest?`השיא שלך: ${cBest} קליקים`:"כמה קליקים תעשה ב-10 שניות?";
+$("cres").textContent=ctag();
+$("clicker").addEventListener("click",()=>{
+  if(!cOn){if($("clicker").disabled)return;cOn=true;cCount=0;cEnd=Date.now()+10000;$("cshare").style.display="none";$("clicker").textContent="0";
+    cTick=setInterval(()=>{const left=Math.max(0,cEnd-Date.now());$("ctime").textContent=(left/1000).toFixed(1);if(!left){clearInterval(cTick);cOn=false;
+      const rank=cCount>=90?"🚀 מכונה!":cCount>=70?"🔥 אצבע של ברזל":cCount>=50?"😎 לא רע בכלל":cCount>=30?"🐢 מתחמם":"😴 נרדמת?";
+      const rec=cCount>cBest;if(rec){cBest=cCount;try{localStorage.setItem("lucia-clicks",cBest)}catch(e){}}
+      $("cres").textContent=`${cCount} קליקים · ${rank}${rec?" · 🏆 שיא חדש!":""}`;$("clicker").textContent="שוב!";$("clicker").disabled=true;setTimeout(()=>$("clicker").disabled=false,1200);$("cshare").style.display="";}},100);return}
+  cCount++;$("clicker").textContent=cCount;
+});
+$("cshare").addEventListener("click",async()=>{const t=`🏎️ עשיתי ${cCount} קליקים ב-10 שניות במירוץ של צוות לוסיה! מי עוקף אותי?`;try{await navigator.clipboard.writeText(t);toast("📋 הועתק! עכשיו תדביקו בקבוצה")}catch(e){toast(t)}});
+
+function funRender(crew){
+  $("wantedSub").textContent=ROTATION==="visit"?"מי שנעלם הכי הרבה זמן מהעיר. טקסט חדש בכל כניסה.":"מי שנעלם הכי הרבה זמן מהעיר. הטקסט מתחלף כל שעה.";
+  $("paperSub").textContent=ROTATION==="visit"?"מהדורה חדשה בכל כניסה לאתר, ישר מהנתונים.":"מהדורה חדשה כל רבע שעה, ישר מהנתונים.";
+  if(!crew.length)return;
+  // helpers for timed rotation (everyone sees the same thing in the same time slot)
+  const rng=seed=>()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+  const shuffle=(arr,seed)=>{const r=rng(seed),x=arr.slice();for(let i=x.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x};
+  const hourSlot=ROTATION==="visit"?VISIT:Math.floor(Date.now()/3600000), qSlot=ROTATION==="visit"?VISIT:Math.floor(Date.now()/900000);
+  const byH=crew.slice().sort((a,b)=>b.hours-a.hours),k=byH[0],second=byH[1];
+  const avg=m=>m.sessions?Math.round(m.hours*60/m.sessions):0;
+  const tour=crew.filter(m=>m.sessions>0).sort((a,b)=>avg(a)-avg(b))[0];
+  const on=crew.filter(m=>m.online&&m.game==="GTA");
+  // WANTED – person by data, text changes every hour
+  const hasAway=crew.some(m=>m.daysAway!=null);
+  const w=crew.slice().sort((a,b)=>hasAway?(b.daysAway??0)-(a.daysAway??0)||a.hours-b.hours:a.hours-b.hours)[0];
+  const days=w.daysAway;
+  const gone=days!=null&&days>0?`לא נראה ב-GTA כבר ${days} ימים.`:`רק ${w.hours} שעות השבוע.`;
+  const WLINES=[
+    "מי שראה אותו, שיודיע לקבוצה.",
+    "חשוד בעבירה חמורה: חיים מחוץ למשחק.",
+    "השכנים מספרים שראו אותו יוצא מהבית. מדאיג.",
+    "אם אתם רואים אותו, אל תתקרבו. הוא עלול לדבר על עבודה.",
+    "המשטרה מציעה פרס למי שיחזיר אותו לשרת.",
+    "נצפה לאחרונה כשהוא אומר \"אני רק הולך לישון מוקדם\".",
+    "החבורה מבקשת: תחזור, לא נשאל שאלות.",
+    "אזהרה: עלול להופיע פתאום ולהגיד \"מה פספסתי?\"."
+  ];
+  const wl=WLINES[Math.abs(hourSlot)%WLINES.length];
+  const reward=(Math.max(1,days??1)*1250000+(hourSlot%7)*250000).toLocaleString("he-IL");
+  $("wanted").innerHTML=`<div class="w1">WANTED</div><div class="w2">מבוקש · חי או מחובר</div><div class="mug">${esc(w.name[0])}</div><div class="nm">${esc(w.name)}</div><p>${esc(gone)} ${esc(wl)}</p><div class="rw">פרס: $${reward}</div>`;
+  // NEWSPAPER – pool of headlines from the data, new edition every 15 minutes
+  const pool=[];
+  pool.push(`דרמה: ${k.name} ישב ${k.hours} שעות ב-GTA השבוע, המשפחה מודאגת`);
+  pool.push(`${k.name} מסרב להתראיין: "אני רק משחק קצת"`);
+  pool.push(`חשד: ${k.name} ישן בתוך הרכב שלו במשחק`);
+  if(second&&second.hours>0)pool.push(`${second.name} במרדף אחרי ${k.name}: רק ${Math.round((k.hours-second.hours)*10)/10} שעות מפרידות ביניהם`);
+  if(on.length>=2)pool.push(`בשידור חי: ${on.map(m=>m.name).join(" ו")} משתוללים בעיר ברגעים אלה`);
+  if(on.length===1)pool.push(`${on[0].name} לבד בעיר עכשיו. "איפה כולם?", שאל בעצב`);
+  if(!on.length)pool.push(`העיר שקטה: אף אחד לא ב-GTA כרגע. חשד לנוכחות בעבודה`);
+  if(tour&&tour!==k)pool.push(`${tour.name} נכנס ${tour.sessions} פעמים, בממוצע ${avg(tour)} דקות. "רק באתי להגיד שלום"`);
+  if(w!==k)pool.push(`המשטרה מחפשת את ${w.name}. השכנים: "פעם הוא היה פה כל ערב"`);
+  const total=Math.round(crew.reduce((t,m)=>t+m.hours,0));
+  pool.push(`החבורה צברה ${total} שעות השבוע. "זה עדיין רק תחביב", טוענים`);
+  pool.push(`מחקר חדש: ${total} שעות בשבוע זה בערך ${Math.round(total/8)} ימי עבודה. החבורה: "עבודה קשה"`);
+  const lateS=m=>m.latestHour==null?-1:(m.latestHour<7?m.latestHour+24:m.latestHour);
+  const owl=crew.slice().sort((a,b)=>lateS(b)-lateS(a))[0];
+  if(owl&&owl.latestHour!=null&&owl.latestHour<7)pool.push(`${owl.name} נצפה מחובר ב-${String(owl.latestHour).padStart(2,"0")}:00 לפנות בוקר. ההורים לא הגיבו`);
+  const ed=shuffle(pool,qSlot);
+  const slotStart=new Date(qSlot*900000);
+  const date=new Date().toLocaleDateString("he-IL",{weekday:"long",day:"numeric",month:"long"});
+  const time=slotStart.toLocaleTimeString("he-IL",{hour:"2-digit",minute:"2-digit"});
+  const PSTYLE=["a","b","c"][Math.floor(rng(VISIT+81)()*3)],P=$("paper");
+  P.className="paper"+(PSTYLE==="a"?"":" v"+PSTYLE);
+  const lis=ed.slice(1,4).map(h=>`<li>${esc(h)}</li>`).join("");
+  if(PSTYLE==="b")P.innerHTML=`<div class="m">ידיעות לוסיה!</div><span class="br">⚡ בלעדי · ${esc(date)}</span><h3>${esc(ed[0]).replace(/[.,]?$/,"!")}</h3><ul>${lis}</ul>`;
+  else if(PSTYLE==="c")P.innerHTML=`<div class="scr">${esc(k.icon||"📺")}<span class="live">● LIVE</span><span class="ch">ערוץ לוסיה 1</span></div><div class="lt"><b>מבזק</b><h3>${esc(ed[0])}</h3></div><ul>${lis}</ul>`;
+  else P.innerHTML=`<div class="mast"><b>ידיעות לוסיה</b><span>${esc(date)} · ${ROTATION==="visit"?"מהדורה מיוחדת בשבילך":"מהדורת "+esc(time)}</span></div><h3>${esc(ed[0])}</h3><ul>${lis}</ul>`;
+  // AWARDS
+  const aw=[];
+  if(owl&&owl.latestHour!=null)aw.push(["🦉","ינשוף השבוע",owl.name,`שיחק עד ${String(owl.latestHour).padStart(2,"0")}:00 בלילה`]);
+  if(tour)aw.push(["🧳","התייר",tour.name,`ממוצע של ${avg(tour)} דקות לכניסה`]);
+  // הנאמן: גם הרבה כניסות וגם הרבה זמן (ממוצע גיאומטרי), ולא מלך השבוע עצמו
+  const loyalScore=m=>Math.sqrt(m.sessions*m.hours);
+  const loyal=crew.filter(m=>m!==k||crew.length<3).sort((a,b)=>loyalScore(b)-loyalScore(a))[0];
+  if(loyal&&loyal.sessions)aw.push(["🐕","הנאמן",loyal.name,`${loyal.sessions} כניסות ו-${loyal.hours} שעות`]);
+  const mar=crew.filter(m=>m.sessions).sort((a,b)=>avg(b)-avg(a))[0];
+  if(mar)aw.push(["🏃","המרתוניסט",mar.name,`ממוצע של ${Math.floor(avg(mar)/60)}:${String(avg(mar)%60).padStart(2,"0")} שעות לסשן`]);
+  $("awards").innerHTML=aw.map(([ic,t,who,p])=>`<div class="award"><div class="ic">${ic}</div><b>${esc(t)}</b><div class="who">${esc(who)}</div><p>${esc(p)}</p></div>`).join("");
+  // TILT
+  const pct=Math.min(100,Math.round(crew.reduce((t,m)=>t+m.hours,0)/(crew.length*12)*100));
+  const lvl=pct<25?"רגועים 😌":pct<50?"מתחממים 🔥":pct<75?"בטילט מלא 😤":"צריך התערבות 🚑";
+  $("tilt").innerHTML=`<b>${lvl} · ${pct}%</b><div class="track"><div class="needle" style="right:${pct}%"></div></div><div class="lbls"><span>רגועים</span><span>מתחממים</span><span>טילט</span><span>🚑</span></div>`;
+}
+
+
+
+function openProfile(i){
+  const m=lastCrew[i];if(!m)return;const p=PROFILES[m.name]||{};
+  $("dlgBody").innerHTML=`<div class="av" style="background:${m.c}">${esc(m.icon||m.name[0])}</div><h3>${esc(m.name)}</h3>${p.quote?`<q>${esc(p.quote)}</q>`:""}<ul>${p.role?`<li><span>תפקיד בצוות</span>${esc(p.role)}</li>`:""}${p.car?`<li><span>רכב אהוב</span>${esc(p.car)}</li>`:""}<li><span>השבוע</span>${m.hours} שעות · ${m.sessions} כניסות</li><li><span>עכשיו</span>${m.online?esc(m.game||"מחובר"):"לא מחובר"}</li></ul><button type="button" id="dlgClose">סגור</button>`;
+  const d=$("dlg");try{d.showModal()}catch(e){d.setAttribute("open","")}
+  $("dlgClose").addEventListener("click",()=>{try{d.close()}catch(e){d.removeAttribute("open")}});
+}
+$("crew").addEventListener("click",e=>{const c=e.target.closest(".card");if(c)openProfile(+c.dataset.i)});
+$("crew").addEventListener("keydown",e=>{const c=e.target.closest(".card");if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openProfile(+c.dataset.i)}});
+function nextAt(day,hour){const n=new Date(),t=new Date(n);t.setHours(hour,0,0,0);t.setDate(n.getDate()+((day-n.getDay()+7)%7));if(t<=n)t.setDate(t.getDate()+7);return t}
+function tick(){
+  const ev=NIGHT||{day:6,hour:21,text:"מוצאי שבת, 21:00"};
+  if(NIGHT)$("nightLabel").textContent="🎮 ערב המשחק הבא בעוד";
+  $("nightText").textContent=ev.text;
+  let s=Math.max(0,Math.floor((nextAt(ev.day,ev.hour)-new Date())/1000));
+  const d=Math.floor(s/86400);s%=86400;const h=Math.floor(s/3600);s%=3600;const m=Math.floor(s/60);
+  $("cd").innerHTML=[[d,"ימים"],[h,"שעות"],[m,"דקות"]].map(([v,l])=>`<div><strong>${v}</strong><span>${l}</span></div>`).join("");
+}
+tick();setInterval(tick,30000);
+async function load(){
+  try{const r=await fetch("stats.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;render(await r.json(),false)}
+  catch(e){render(SAMPLE,true)}
+}
+function newEdition(){VISIT=Math.floor(Math.random()*1e9);if(lastData)render(lastData,lastSample)}
+$("newEd").addEventListener("click",newEdition);
+let hiddenAt=0;
+document.addEventListener("visibilitychange",()=>{if(document.hidden)hiddenAt=Date.now();else if(hiddenAt&&Date.now()-hiddenAt>3000)newEdition()});
+addEventListener("pageshow",e=>{if(e.persisted)newEdition()});
+load();setInterval(load,60000);
+}
+</script>
+</body>
+</html>
