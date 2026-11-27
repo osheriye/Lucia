@@ -35,16 +35,16 @@
    "name": "נהוראי",
    "title": "",
    "hours": 5.8,
-   "sessions": 4,
-   "online": false,
-   "game": "",
+   "sessions": 5,
+   "online": true,
+   "game": "GTA",
    "daysAway": 0,
    "latestHour": 20
   },
   {
    "name": "אושרי",
    "title": "",
-   "hours": 3.4,
+   "hours": 3.5,
    "sessions": 4,
    "online": true,
    "game": "GTA",
@@ -204,7 +204,7 @@
    0,
    0,
    0,
-   12,
+   18,
    0,
    0,
    0,
@@ -296,9 +296,9 @@
     "מלאכי": 0,
     "אדיר": 0,
     "נהוראי": 2,
-    "אושרי": 0.2
+    "אושרי": 0.3
    }
   }
  ],
- "updated": "2026-11-27T17:24:42.752Z"
+ "updated": "2026-11-27T17:30:03.292Z"
 }
