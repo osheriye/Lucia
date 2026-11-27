@@ -26,7 +26,7 @@
    "title": "",
    "hours": 3.2,
    "sessions": 5,
-   "online": false,
+   "online": true,
    "game": "",
    "daysAway": null,
    "latestHour": null
@@ -34,7 +34,7 @@
   {
    "name": "נהוראי",
    "title": "",
-   "hours": 4.7,
+   "hours": 4.8,
    "sessions": 4,
    "online": true,
    "game": "GTA",
@@ -199,7 +199,7 @@
    0,
    0,
    0,
-   1,
+   2,
    0,
    0,
    0,
@@ -300,5 +300,5 @@
    }
   }
  ],
- "updated": "2026-11-27T12:18:20.987Z"
+ "updated": "2026-11-27T12:19:25.651Z"
 }
