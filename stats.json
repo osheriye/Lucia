@@ -36,7 +36,7 @@
    "title": "",
    "hours": 4.7,
    "sessions": 3,
-   "online": false,
+   "online": true,
    "game": "",
    "daysAway": 0,
    "latestHour": 20
@@ -300,5 +300,5 @@
    }
   }
  ],
- "updated": "2026-11-27T09:16:27.059Z"
+ "updated": "2026-11-27T11:02:38.873Z"
 }
