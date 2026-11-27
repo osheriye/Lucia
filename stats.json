@@ -27,7 +27,7 @@
    "hours": 6.7,
    "sessions": 6,
    "online": true,
-   "game": "GTA",
+   "game": "",
    "daysAway": 0,
    "latestHour": 0
   },
@@ -44,7 +44,7 @@
   {
    "name": "אושרי",
    "title": "",
-   "hours": 8.9,
+   "hours": 9,
    "sessions": 4,
    "online": true,
    "game": "GTA",
@@ -61,7 +61,7 @@
   {
    "a": "אדיר",
    "b": "אושרי",
-   "hours": 3.5
+   "hours": 3.6
   },
   {
    "a": "אדיר",
@@ -227,7 +227,7 @@
    180
   ],
   [
-   145,
+   153,
    0,
    0,
    0,
@@ -326,5 +326,5 @@
    }
   }
  ],
- "updated": "2026-11-27T22:54:30.189Z"
+ "updated": "2026-11-27T22:58:46.126Z"
 }
