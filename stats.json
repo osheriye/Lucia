@@ -26,8 +26,8 @@
    "title": "",
    "hours": 3.2,
    "sessions": 5,
-   "online": true,
-   "game": "EA SPORTS FC 27",
+   "online": false,
+   "game": "",
    "daysAway": null,
    "latestHour": null
   },
@@ -300,5 +300,5 @@
    }
   }
  ],
- "updated": "2026-11-27T15:07:31.593Z"
+ "updated": "2026-11-27T16:08:10.961Z"
 }
