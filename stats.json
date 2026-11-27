@@ -24,49 +24,49 @@
   {
    "name": "אדיר",
    "title": "",
-   "hours": 5.7,
+   "hours": 5.9,
    "sessions": 6,
    "online": true,
    "game": "GTA",
    "daysAway": 0,
-   "latestHour": 23
+   "latestHour": 0
   },
   {
    "name": "נהוראי",
    "title": "",
-   "hours": 10.2,
+   "hours": 10.4,
    "sessions": 5,
    "online": true,
    "game": "GTA",
    "daysAway": 0,
-   "latestHour": 23
+   "latestHour": 0
   },
   {
    "name": "אושרי",
    "title": "",
-   "hours": 7.9,
+   "hours": 8.1,
    "sessions": 4,
    "online": true,
    "game": "GTA",
    "daysAway": 0,
-   "latestHour": 23
+   "latestHour": 0
   }
  ],
  "pairs": [
   {
    "a": "נהוראי",
    "b": "אושרי",
-   "hours": 4.4
+   "hours": 4.6
   },
   {
    "a": "אדיר",
    "b": "נהוראי",
-   "hours": 2.5
+   "hours": 2.7
   },
   {
    "a": "אדיר",
    "b": "אושרי",
-   "hours": 2.5
+   "hours": 2.7
   }
  ],
  "heat": [
@@ -224,10 +224,10 @@
    119,
    154,
    179,
-   167
+   180
   ],
   [
-   0,
+   19,
    0,
    0,
    0,
@@ -311,10 +311,20 @@
     "אסף": 2,
     "מלאכי": 0,
     "אדיר": 2.5,
-    "נהוראי": 6.4,
-    "אושרי": 4.7
+    "נהוראי": 6.5,
+    "אושרי": 4.8
+   }
+  },
+  {
+   "day": 6,
+   "hours": {
+    "אסף": 2,
+    "מלאכי": 0,
+    "אדיר": 2.7,
+    "נהוראי": 6.6,
+    "אושרי": 4.9
    }
   }
  ],
- "updated": "2026-11-27T21:54:52.499Z"
+ "updated": "2026-11-27T22:05:34.423Z"
 }
