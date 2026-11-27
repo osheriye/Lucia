@@ -34,29 +34,29 @@
   {
    "name": "נהוראי",
    "title": "",
-   "hours": 7.2,
+   "hours": 7.4,
    "sessions": 5,
    "online": true,
    "game": "GTA",
    "daysAway": 0,
-   "latestHour": 20
+   "latestHour": 21
   },
   {
    "name": "אושרי",
    "title": "",
-   "hours": 4.9,
+   "hours": 5.1,
    "sessions": 4,
    "online": true,
    "game": "GTA",
    "daysAway": 0,
-   "latestHour": 20
+   "latestHour": 21
   }
  ],
  "pairs": [
   {
    "a": "נהוראי",
    "b": "אושרי",
-   "hours": 1.4
+   "hours": 1.6
   }
  ],
  "heat": [
@@ -211,8 +211,8 @@
    0,
    0,
    78,
-   111,
-   0,
+   119,
+   13,
    0,
    0
   ],
@@ -301,10 +301,10 @@
     "אסף": 2,
     "מלאכי": 0,
     "אדיר": 0,
-    "נהוראי": 3.4,
-    "אושרי": 1.7
+    "נהוראי": 3.6,
+    "אושרי": 1.9
    }
   }
  ],
- "updated": "2026-11-27T18:55:21.468Z"
+ "updated": "2026-11-27T19:06:00.551Z"
 }
